@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import bodyParser from "body-parser";
-import auth from './routes/UserRoute'
+import auth  from './routes/UserRoute';
 import dotenv from 'dotenv'
 dotenv.config();
 
@@ -24,7 +24,8 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Hello, world!');
 });
 
-app.use("/",auth);
+//set the routes for  register and login
+app.use( "/", auth);
 
 // Start the server
 const port = 3000;

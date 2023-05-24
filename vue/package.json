@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-
     "dev": "vite",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
@@ -11,9 +10,13 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false"
   },
   "dependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/jwt-decode": "^3.1.0",
+    "axios": "^1.4.0",
+    "jwt-decode": "^3.1.2",
     "pinia": "^2.0.36",
-    "vue": "^3.3.2",
-    "vue-router": "^4.2.0"
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.1"
   },
   "devDependencies": {
     "@tsconfig/node18": "^2.0.1",

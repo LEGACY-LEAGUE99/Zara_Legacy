@@ -1,48 +1,33 @@
-import 'dotenv/config'
-import express, { Express, Request, Response } from 'express';
-import bodyParser from 'body-parser';
-import Mongoose from 'mongoose';
-import morgan from 'morgan'
-import authRoute from './routes/authRoute';
-import prodRoute from './routes/prodRoute';
-import user from './routes/user'
-import nom from './routes/nom'
+import express, { Request, Response } from 'express';
+import mongoose from 'mongoose';
+import bodyParser from "body-parser";
+import auth from './routes/UserRoute'
+import dotenv from 'dotenv'
+dotenv.config();
 
-import searchRoute from './routes/searchRoute';
-import cors from 'cors';
-
-const DB_URI = process.env.DB_URI
-
-const app: Express = express();
-const PORT = 3002;
-
-// Parse incoming request bodies
-app.use(bodyParser.urlencoded({ extended: false }));
+ 
+// Set up Express
+const app  = express();
+const PORT = 5000;
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(morgan('dev'))
-app.use(cors())
-
-app.use("/auth", authRoute)
-app.use("/products", prodRoute)
-
-app.get("/", (req: Request, res: Response) => {
-  res.send("hellu")
-})
-
-
 
 // Connect to MongoDB
-Mongoose
-  .connect(DB_URI as string)
-  .then(() => {
-    console.log('Connected to MongoDB');
-  })
-  .catch((error) => {
-    console.error('MongoDB connection error:', error);
+mongoose.connect('mongodb+srv://messud:azerty123@seniordata.sg77wxf.mongodb.net/?retryWrites=true&w=majority') .then(() => {
+    console.log("Connected to MongoDB")}).catch((err) => {
+        console.error("Failed to connect to MongoDB", err);
+      });
+
+// Define a basic route
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello, world!');
 });
 
+app.use("/",auth);
 
 // Start the server
-app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
+const port = 3000;
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });

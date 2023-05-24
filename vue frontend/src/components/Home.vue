@@ -1,3 +1,13 @@
 <template>
-    this is home page
+  <div>e</div>
 </template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style>
+
+</style>

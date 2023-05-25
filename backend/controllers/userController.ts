@@ -1,32 +1,67 @@
-import { Request, Response } from 'express';
-import { userSearch, User } from '../models/userModel';
+import { Request, Response } from "express";
+import User, { UserDocument } from "../models/UserModel";
+import jwt from "jsonwebtoken" ;
+import dotenv from "dotenv";
 
-export const searchUsers = (req: Request, res: Response) => {
-  const searchTerm: string = req.query.q as string;
+dotenv.config();
+const { SECRET_KEY } = process.env;
 
-  userSearch(searchTerm, (err: Error | null, results: any) => {
-    if (err) {
-      console.error('Error searching users:', err);
-      res.status(500).json({ error: 'Internal Server Error' });
-    } else {
-      res.json(results);
-    }
-  });
+const generateToken = (user: UserDocument): string => {
+  return jwt.sign({ user }, SECRET_KEY || "");
 };
-export const postUser = async (req: Request, res: Response) => {
+
+const register = async (req: Request, res: Response): Promise<Response> => {
   try {
-    const user= req.body;
-    console.log('Creating user', user);
+    const { fname, lname, email, password } = req.body;
 
-    const createdUser = await User.create({
-      name: user.name,
-      adresse: user.adresse,
-      
-    });
+    let user = await User.findOne({ email });
 
-    res.status(200).send(createdUser);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send(error);
+    if (user) {
+      return res
+        .status(400)
+        .send({ message: "Email already exists", status: false });
+    }
+
+    const is_admin = req.body.is_admin || false;
+    user = await User.create({ fname, lname, email, password, is_admin });
+
+    const token = generateToken(user);
+    return res.status(200).send({ user, token, status: true });
+  } catch (err: any) {
+    return res.status(400).send({ message: err.message });
   }
 };
+
+const login = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res
+        .status(400)
+        .send({ message: "Wrong Email or Password", status: false });
+    }
+
+    const match = user.checkPassword(password);
+
+    if (!match) {
+      return res
+        .status(400)
+        .send({ message: "Wrong Email or Password", status: false });
+    }
+
+    const token = generateToken(user);
+
+    return res.status(200).send({ user, token, status: true });
+  } catch (err: any) {
+    return res.status(400).send({ message: err.message });
+  }
+};
+
+const isAdmin = (user: UserDocument): boolean => {
+  return user.is_admin;
+};
+
+export { register, login, isAdmin };

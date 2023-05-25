@@ -8,6 +8,8 @@ export interface UserDocument extends Document {
   balance: number,
   cart: string,
   adresse:string
+  is_admin: boolean;
+ 
 }
 
 const UserSchema: Schema<UserDocument> = new Schema({
@@ -17,7 +19,8 @@ const UserSchema: Schema<UserDocument> = new Schema({
   receivesEmails: Boolean,
   balance: Number,
   cart: String,
-  adresse:String
+  adresse:String ,
+  is_admin: { type: Boolean },
 });
 
 

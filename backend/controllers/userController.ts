@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { userSearch,User } from '../models/userModel';
+import { userSearch, User } from '../models/userModel';
 
 export const searchUsers = (req: Request, res: Response) => {
   const searchTerm: string = req.query.q as string;

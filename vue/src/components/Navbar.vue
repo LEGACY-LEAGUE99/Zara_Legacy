@@ -25,7 +25,7 @@
   <script lang="ts">
   import { defineComponent, ref, onMounted } from 'vue';
 
-  console.log("aaa")
+  
   interface TokenPayload {
     email: string;
     iat: number;
@@ -96,7 +96,7 @@ a{
     margin-left: 69%;
 }
 #card{
-    background-color: white;
+   
     width: 100%;
     height: 80px;
     position: fixed;

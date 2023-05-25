@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div>
       <header>
         <div id="hambuger">
@@ -80,7 +80,7 @@
   
   <script lang="ts">
   import axios, { type AxiosResponse } from 'axios';
-  import { Component, Vue } from 'vue-property-decorator';
+ 
   
   interface Product {
     id: number;
@@ -92,7 +92,6 @@
     size: string;
   }
   
-  @Component
   export default class MyComponent extends Vue {
     private products: Product[] = [];
     private searchTerm: string = '';
@@ -129,4 +128,4 @@
     }
   }
   </script>
-  
+   -->

@@ -31,6 +31,16 @@ export const getcolor = async (req: Request, res: Response) => {
       res.status(500).json(error)
   }
 }
+export const getName = async (req: Request, res: Response) => {
+  try {
+      const {cat, subcat, variant} = req.params
+
+      const products = await Product.find({name: subcat})
+      res.status(200).json(products)
+  } catch (error) {
+      res.status(500).json(error)
+  }
+}
 
 export const getAll = async (req: Request, res: Response) => {
   try {

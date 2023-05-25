@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Home from '@/components/Home.vue';
 import Login from '@/components/Login.vue';
 import SignUp from '@/components/SignUp.vue';
@@ -8,59 +8,63 @@ import Help from '@/components/Help.vue';
 import SideBar from '@/components/SideBar.vue';
 import Navbar from '@/components/Navbar.vue';
 import Cart from '@/components/Cart.vue';
+import OneP from '../components/OneP.vue'
 
-
-const routes = [
+const routes: Array<RouteRecordRaw> = [
   {
-    path:'/cart',
-    name:'Cart',
-    component:Cart
+    path: '/OneProduct',
+    component: OneP,
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: Cart,
   },
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
   },
   {
     path: '/Login',
     name: 'Login',
-    component: Login
+    component: Login,
   },
   {
     path: '/SignUp',
     name: 'SignUp',
-    component: SignUp
+    component: SignUp,
   },
   {
     path: '/Products',
     name: 'Products',
-    component: Products
+    component: Products,
   },
   {
     path: '/Compte',
     name: 'Compte',
-    component: Compte
+    component: Compte,
   },
   {
     path: '/Help',
     name: 'Help',
-    component: Help
+    component: Help,
   },
   {
     path: '/SideBar',
     name: 'SideBar',
-    component: SideBar
+    component: SideBar,
   },
   {
     path: '/NavBar',
     name: 'NavBar',
-    component: Navbar
-  }
+    component: Navbar,
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes
+  routes,
 });
 
 export default router;

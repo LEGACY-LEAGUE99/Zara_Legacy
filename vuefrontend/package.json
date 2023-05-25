@@ -1,0 +1,36 @@
+{
+  "name": "vue-frontend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "run-p type-check build-only",
+    "preview": "vite preview",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false"
+  },
+  "dependencies": {
+<<<<<<<< HEAD:vuefrontend/package.json
+    "bootstrap-vue": "^2.23.1",
+========
+    "@types/axios": "^0.14.0",
+    "@types/jwt-decode": "^3.1.0",
+    "axios": "^1.4.0",
+    "jwt-decode": "^3.1.2",
+>>>>>>>> bfae3e79739813ff51567e706159aa4c6c9b47f7:vue/package.json
+    "pinia": "^2.0.36",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.1"
+  },
+  "devDependencies": {
+    "@tsconfig/node18": "^2.0.1",
+    "@types/node": "^18.16.8",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "@vitejs/plugin-vue-jsx": "^3.0.1",
+    "@vue/tsconfig": "^0.4.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "~5.0.4",
+    "vite": "^4.3.5",
+    "vue-tsc": "^1.6.4"
+  }
+}

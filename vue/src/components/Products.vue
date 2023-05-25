@@ -27,6 +27,7 @@
   import { defineComponent, ref, onMounted } from 'vue';
   import Navbar from './Navbar.vue';
   import axios from 'axios';
+
   interface Product {
     id: number;
     gender: string;
@@ -64,8 +65,9 @@
       };
   
       const fetchProducts = async () => {
+        const API=''
         try {
-          const response = await axios.get('http://localhost:3002/api/get');
+          const response = await axios.get(API);
           const productsData: Product[] = response.data;
           products.value = productsData;
         } catch (error) {

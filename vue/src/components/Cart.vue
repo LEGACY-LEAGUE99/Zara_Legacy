@@ -1,42 +1,192 @@
 <template>
     <div>
-      <div id="header"></div>
-      <div id="container">
-        <div id="top">
-          <div id="SHOPPING-BASKET">SHOPPING BASKET (0)</div>
-          <div id="BUY-LATER">BUY LATER (0)</div>
+      <nav>
+        <div id="logo">
+          <a href="./index.html"
+            ><img
+              src="https://logodownload.org/wp-content/uploads/2014/05/zara-logo-1.png"
+              alt="zaralogo"
+          /></a>
         </div>
+        <div id="help">
+          <!-- <a href="./login.html"> <div>LOGIN</div></a> -->
+          <a href="./zarahelp.html"><div>HELP</div></a>
+        </div>
+      </nav>
   
-        <div id="content">
-          <div id="items"></div>
+      <div id="bag">
+        <h3>SHOPPING BAG</h3>
+        <p><span id="cartLen">dadad</span> ITEM</p>
+      </div>
+      <div id="items"></div>
   
-          <div id="cart-details">
-            <div id="total-items">12 ITEMS</div>
-            <div id="total-price-including-tax-div">
-              <div id="total-price-including-tax-title">Total items: including tax</div>
-              <div id="total-price-including-tax-data">443.88 €</div>
-            </div>
-            <div id="total-price-div">
-              <div id="total-price-title">TOTAL:</div>
-              <div id="total-price-data">443.88 €</div>
-            </div>
-            <div id="promo-code">DO YOU HAVE A PROMOTIONAL CODE? Enter it when you reach the payment page</div>
-            <div id="process-order">PROCESS ORDER</div>
-          </div>
-          <div id="empty_basket_btn">EMPTY BASKET</div>
+      <div id="card">
+        <div>
+          <div id="price">TOTAL : <span id="total">azda</span></div>
+          <!-- <button @click="proceed()">CONTINUE</button> -->
         </div>
       </div>
-      <div id="footer"></div>
+  
+      <div id="footer">
+        <Footer></Footer>
+      </div>
     </div>
   </template>
   
-  <script>
-  export default {
-    name: 'Cart'
-  };
-  </script>
+  
   
   <style scoped>
-  /* Add your CSS styles here */
+  *{
+    margin: 0%;
+    padding: 0%;
+    font-family: Neue-Helvetica, Helvetica, Arial, sans-serif;;
+}
+nav{
+    position: sticky;
+    top: 0%;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+}
+#logo{
+    width: 210px;
+    margin-top: 10px;
+    margin-left: 8%;
+    margin-bottom: 10px;
+}
+#logo>a>img{
+    width: 100%;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+
+#help{
+    width: 8%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    margin-top: 20px;
+    margin-right: 30px;
+    font-weight: bold;
+}
+#bag{
+    margin-left: 100px;
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+#bag>p{
+    font-size: 10px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+#items{
+    margin-left: 100px;
+    width: 100ev;
+    height: 400px;
+    font-size: 15px;
+    line-height: 20px;
+    display: flex;
+    margin-bottom: 200px;
+}
+#items>div{
+    width: 480px;
+    height: 100%;
+    margin-right: 20px;
+    display: flex;
+}
+#items>div>img{
+    width: 60%;
+    margin-right: 20px;
+}
+
+#items>div button{
+    padding:.2em .3em;
+    /* cursor: pointer; */
+    background-color: transparent;
+    border: none;
+    font-size: large;
+}
+
+.yellow{
+    background-color: #ffe800;
+    width: 90px;
+    padding: 5px;
+}
+.desc p,h5{
+    margin-bottom: 15px;
+}
+/* p{
+    text-align: center;
+    margin-top: 200px;
+    font-size: 10px;
+} */
+#card>div{
+    display: flex;
+    margin-left: 69%;
+}
+#card{
+    background-color: white;
+    width: 99%;
+    height: 80px;
+    position: fixed;
+    bottom: 0%;
+}
+#card>div>button{
+    width: 240px;
+    background-color: black;
+    border: none;
+    color: white;
+    height: 40px;
+    margin: 20px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+#card>div>button:hover{
+    background-color: rgb(53, 53, 53);
+    cursor: pointer;
+}
+
+#price{
+    font-size: 11px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+@media only screen and (min-width: 375px) and (max-width: 768px){
+
+    #card>div{
+        display: flex;
+        margin-left: 48%;
+    }
+    #help{
+        width: 15%;
+        font-size: 13px;
+    }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 390px){
+    #items{
+        display: block;
+        margin-left: 10%;
+    }
+    #items>div{
+        margin-bottom: 40px;
+        width: 330px;
+    }
+    #card{
+        border-top: 2px solid black;
+        position: fixed;
+    }
+    #card>div{
+        margin-left: 10%;
+    }
+    #help{
+        width: 27%;
+        margin-right: 2%;
+    }
+}
   </style>
   

@@ -14,7 +14,7 @@ import SignUp from './components/SignUp.vue';
 import Products from './components/Products.vue';
 import Compte from './components/Compte.vue';
 import Help from './components/Help.vue';
-import Navbar from './components/Navbar.vue';
+// import Navbar from './components/Navbar.vue';
 
 </script>
 

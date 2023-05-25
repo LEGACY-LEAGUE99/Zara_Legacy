@@ -7,8 +7,15 @@ import Compte from '@/components/Compte.vue';
 import Help from '@/components/Help.vue';
 import SideBar from '@/components/SideBar.vue';
 import Navbar from '@/components/Navbar.vue';
+import Cart from '@/components/Cart.vue';
+
 
 const routes = [
+  {
+    path:'/cart',
+    name:'Cart',
+    component:Cart
+  },
   {
     path: '/',
     name: 'Home',

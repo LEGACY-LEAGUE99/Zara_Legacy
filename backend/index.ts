@@ -25,11 +25,6 @@ app.use(cors())
 app.use("/auth", authRoute)
 app.use("/products", prodRoute)
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("hellu")
-})
-
-
 
 // Connect to MongoDB
 Mongoose

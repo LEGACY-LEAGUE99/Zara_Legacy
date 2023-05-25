@@ -1,17 +1,7 @@
 import mongoose, { Document } from "mongoose";
 import bcrypt from "bcrypt";
 
-export interface UserDocument extends Document {
-  fname: string;
-  lname: string;
-  email: string;
-  password: string;
-  balance: number,
-  cart: string,
-  adresse:string
-  is_admin: boolean;
-  checkPassword(password: string): boolean;
-}
+
 
 const userSchema = new mongoose.Schema<UserDocument>(
   {
@@ -42,3 +32,16 @@ userSchema.methods.checkPassword = function (password: string) {
 
 const User = mongoose.model<UserDocument>("user", userSchema);
 export default User;
+
+
+export interface UserDocument extends Document {
+  fname: string;
+  lname: string;
+  email: string;
+  password: string;
+  balance: number,
+  cart: string,
+  adresse:string
+  is_admin: boolean;
+  checkPassword(password: string): boolean;
+}

@@ -235,7 +235,14 @@ export default {
     display: flex;
     margin-top: 1%;
     }
-    
+    .checkbox2 {
+    position: relative;
+    bottom: -230px;
+    left: -524px;
+    width: 100%;
+    display: flex;
+    margin-top: 1%;
+    }
     .checkbox__label {
     position: relative;
     bottom: 22px;

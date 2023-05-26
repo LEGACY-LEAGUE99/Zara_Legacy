@@ -15,14 +15,50 @@
 </template>
 
 <script lang="ts">
-export default {
-  props: {
-    faqs: {
-      type: Array,
-      required: true
-    }
-  }
-};
+import { defineComponent } from 'vue';
+import axios from 'axios';
+import SideBar from './SideBar.vue';
+
+interface HelpPage {
+  title: string;
+  question: string;
+  Answer: string;
+}
+
+export default defineComponent({
+    data() {
+        return {
+            searchTitle: "",
+            isLoading: false,
+            errorMessage: "",
+            helpPage: null as HelpPage | any,
+        };
+    },
+    methods: {
+        async searchHelp() {
+            try {
+                this.isLoading = true;
+                this.errorMessage = "";
+                this.helpPage = null;
+                const response = await axios.get(`http://localhost:3000/help/${this.searchTitle}`);
+                this.helpPage = response.data;
+                console.log(this.helpPage.answer);
+            }
+            catch (error: any) {
+                if (error.response && error.response.status === 404) {
+                    this.errorMessage = "Help page not found.";
+                }
+                else {
+                    this.errorMessage = "Internal server error.";
+                }
+            }
+            finally {
+                this.isLoading = false;
+            }
+        },
+    },
+    components: { SideBar }
+});
 </script>
 
 <style scoped>

@@ -21,15 +21,22 @@
             Inditex’s The List programme, which helps guarantee both that
             production processes are
           </p> -->
-          <p @click="redirectToAllProducts">View more</p>
+          <p @click="redirectToProducts">View more</p>
         </div>
         <div class="image_div">
-          <img :src="product.images[2]" alt="" />
+            <img
+
+    :src="product.images[currentImageIndex]"
+    alt=""
+    @wheel="changeImage"
+    ref="imgElement"
+  />
+          
         </div>
         <div class="product_info_rightSide">
           <div class="product_name">
             <h2>{{ product.name }}</h2>
-            <img :src="product.images[2]" alt="" />
+            <!-- <img :src="product.images[2]" alt="" /> -->
           </div>
           <p>{{ product.description }}</p>
           <p>${{ product.price }}</p>
@@ -81,6 +88,7 @@ export default defineComponent({
   data() {
     return {
       vd: '',
+      currentImageIndex: 0,
       product: {
         name: '',
         description: '',
@@ -97,8 +105,24 @@ export default defineComponent({
     };
   },
   methods: {
-    redirectToAllProducts() {
-      this.$router.push('/products');
+    redirectToProducts() {
+      window.location.href = "/Products";
+    },
+    changeImage(event: WheelEvent) {
+      const delta = Math.sign(event.deltaY);
+      this.currentImageIndex = (this.currentImageIndex + delta + this.product.images.length) % this.product.images.length;
+
+      if (delta > 0) {
+        this.setCursorDPI('zoom-out');
+      } else if (delta < 0) {
+        this.setCursorDPI('zoom-in');
+      }
+    },
+    setCursorDPI(cursorStyle: string) {
+      const imgElement = this.$refs.imgElement as HTMLImageElement;
+      if (imgElement) {
+        imgElement.style.cursor = cursorStyle;
+      }
     },
   },
   mounted() {
@@ -140,11 +164,11 @@ export default defineComponent({
   
   <style scoped>
   .select-element {
-  width: 200px; 
+  width: 285px; 
   padding: 8px;
   font-size: 16px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 2px;
 }
 
 .select-element option {
@@ -247,12 +271,12 @@ export default defineComponent({
               cursor: pointer;
             }
             button {
-              margin: 0.8em 0em;
+              margin: 0.9m 0em;
               height: 7%;
               width: 100%;
               border: none;
-              background-color: black;
-              color: white;
+              background-color: rgb(127, 127, 127);
+              color: rgb(255, 250, 250);
               font-weight: bold;
               cursor: pointer;
             }

@@ -18,6 +18,7 @@ import Navbar from '@/components/Navbar.vue';
 import Cart from '@/components/Cart.vue';
 import OneP from '@/components/OneP.vue';
 
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/OneProduct',
@@ -33,36 +34,14 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Home',
     component: Home,
   },
-  {
-    path: '/Login',
-    name: 'Login',
-    component: Login,
-  },
-  {
-    path: '/SignUp',
-    name: 'SignUp',
-    component: SignUp,
-  },
+  
   {
     path: '/Products',
     name: 'Products',
     component: Products,
   },
-  {
-    path: '/Compte',
-    name: 'Compte',
-    component: Compte,
-  },
-  {
-    path: '/Help',
-    name: 'Help',
-    component: Help,
-  },
-  {
-    path: '/SideBar',
-    name: 'SideBar',
-    component: SideBar,
-  },
+  
+ 
   {
     path: '/NavBar',
     name: 'NavBar',

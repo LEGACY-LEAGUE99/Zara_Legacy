@@ -15,8 +15,8 @@
           <div class="flex">
             <p>{{ product.name }}</p>
             <div>
-              <p style="text-decoration: line-through;">{{ product.discount }}</p>
-              <p>${{ product.price }}</p>
+              <p style="text-decoration: line-through;">${{ product.price }}</p>
+              <p>{{ product.discount *100}}% discount</p>
             </div>
           </div>
         </div>

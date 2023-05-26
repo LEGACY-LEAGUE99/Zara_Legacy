@@ -24,19 +24,19 @@
           <p @click="redirectToAllProducts">View more</p>
         </div>
         <div class="image_div">
-          <img :src="product.img" alt="" />
+          <img :src="product.images[2]" alt="" />
         </div>
         <div class="product_info_rightSide">
           <div class="product_name">
             <h2>{{ product.name }}</h2>
-            <img :src="product.img" alt="" />
+            <img :src="product.images[2]" alt="" />
           </div>
           <p>{{ product.description }}</p>
           <p>${{ product.price }}</p>
           <p>INCLUDES TVA</p>
           <hr />
           <div class="sizes">
-            <p>{{ product.size }}</p>
+            <p>{{ product.availableSizes.join(', ') }}</p>
           </div>
   
           <div class="sizeScale">
@@ -45,7 +45,7 @@
           </div>
           <button @click="addToCart">add to cart</button>
   
-          <p>{{ product }}</p>
+          <p>{{ product.discount }}</p>
           <p>DELIVERY, EXCHANGES AND RETURNS</p>
         </div>
       </div>
@@ -56,78 +56,99 @@
         <h1 class="X">X</h1>
         <div id="popupmain">
           <div class="flex">
-            <img :src="product.img" alt="" />
+            <img :src="product.images[0]" alt="" />
             <div>{{ product.name }}</div>
             <div>{{ product.price }}</div>
           </div>
         </div>
-  
-      
-  
       </div>
     </div>
   </template>
   
   <script lang="ts">
-  import { defineComponent } from 'vue';
-  
-  interface Product {
-    img: string;
-    name: string;
-    description: string;
-    price: number;
-    size: string;
-    id: number;
-  }
-  
-  export default defineComponent({
-    name: 'ProductDetails',
-    data() {
-      return {
-        vd: '',
-        product: {
-          img: '',
-          name: '',
-          description: '',
-          price: 0,
-          size: '',
-          id: 0
-        }
-      };
+import { defineComponent } from 'vue';
+import axios from 'axios';
+
+interface Product {
+  name: string;
+  description: string;
+  availableSizes: string[];
+  price: number;
+  quantity: number;
+  category: string;
+  subCategory: string;
+  variant: string;
+  images: string[];
+  discount: number;
+  id: string;
+}
+
+export default defineComponent({
+  name: 'OneP',
+  data() {
+    return {
+      vd: '',
+      product: {
+        name: '',
+        description: '',
+        availableSizes: [''],
+        price: 0,
+        quantity: 0,
+        category: '',
+        subCategory: '',
+        variant: '',
+        images: [''],
+        discount: 0,
+        id: ''
+      } as Product
+    };
+  },
+  methods: {
+    redirectToAllProducts() {
+      this.$router.push('/All');
     },
-    methods: {
-      redirectToAllProducts() {
-        this.$router.push('/All');
-      },
-      addToCart() {
-        window.location.href = `/cart/${this.product.id}`;
-      },
-      addToBag() {
-        window.location.href = `/cart/${this.product.id}`;
-      }
+    addToCart() {
+      window.location.href = `/cart/${this.product.id}`;
     },
-    mounted() {
-      // Initialize data
-      this.vd = ''; // Set the video source
-      
-      // Set the product data based on the current URL
-      const currentUrl = window.location.href;
-      const id = parseInt(currentUrl.substring(currentUrl.lastIndexOf('/') + 1));
-      const obj: ProductDocument = JSON.parse(this.obj); // Assuming the JSON data is passed as a prop or fetched from an API response
-      
-      this.product = {
-        img: obj.images[0],
-        name: obj.name,
-        description: obj.description,
-        price: obj.price,
-        size: obj.availableSizes[0],
-        id: id
-      };
+    addToBag() {
+      window.location.href = `/cart/${this.product.id}`;
     }
-  });
-  </script>
-  
+  },
+  mounted() {
+    this.vd = '';
+    
+    const currentUrl = window.location.href;
+    const id = currentUrl.substring(currentUrl.lastIndexOf('/')).split("=")[1];
+    
+    axios
+      .get(`http://localhost:3002/products/name/${id}`)
+      .then(response => {
+       
+        const productData = response.data[0];
+        const obj: Product = {
+          name: productData.name,
+          description: productData.description,
+          availableSizes: productData.availableSizes,
+          price: productData.price,
+          quantity: productData.quantity,
+          category: productData.category,
+          subCategory: productData.subCategory,
+          variant: productData.variant,
+          images: productData.images,
+          discount: productData.discount,
+          id: productData.id
+        };
+        console.log(obj)
+        this.product = obj;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+});
 </script>
+
+  
 
   
   <style scoped>

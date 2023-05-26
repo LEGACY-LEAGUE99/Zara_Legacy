@@ -1,14 +1,11 @@
-<<<<<<< HEAD:vuefrontend/src/router/index.ts
-import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../components/Home.vue';
-import Login from '../components/Login.vue';
-import SignUp from '../components/SignUp.vue';
-import Products from '../components/Products.vue';
-import Compte from '../components/Compte.vue';
-import Help from '../components/Help.vue';
-import SideBar from '../components/SideBar.vue';
+<template>
+  <div>
+    <Navbar />
+    <router-view />
+  </div>
+</template>
 
-=======
+<script lang="ts">
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Home from '@/components/Home.vue';
 import Login from '@/components/Login.vue';
@@ -19,8 +16,7 @@ import Help from '@/components/Help.vue';
 import SideBar from '@/components/SideBar.vue';
 import Navbar from '@/components/Navbar.vue';
 import Cart from '@/components/Cart.vue';
-import OneP from '../components/OneP.vue'
->>>>>>> 2a47fa22e6638f5ef5601ddf4ea8dc9130c68626:vue/src/router/index.ts
+import OneP from '@/components/OneP.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -29,7 +25,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/cart',
-    name: 'Cart',
+    // name: 'Cart',
     component: Cart,
   },
   {
@@ -65,10 +61,6 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/SideBar',
     name: 'SideBar',
-<<<<<<< HEAD:vuefrontend/src/router/index.ts
-    component: SideBar
-  }
-=======
     component: SideBar,
   },
   {
@@ -76,12 +68,20 @@ const routes: Array<RouteRecordRaw> = [
     name: 'NavBar',
     component: Navbar,
   },
->>>>>>> 2a47fa22e6638f5ef5601ddf4ea8dc9130c68626:vue/src/router/index.ts
 ];
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes,
 });
 
-export default router;
+export default {
+  components: {
+    Navbar,
+  },
+  router,
+};
+</script>
+
+<style>
+</style>

@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 import { Request, Response } from "express";
 import User, { UserDocument } from "../models/UserModel";
 import jwt from "jsonwebtoken" ;
 import dotenv from "dotenv";
+=======
+import { Request, Response } from 'express';
+import { userSearch,User } from '../models/User';
+>>>>>>> 2a47fa22e6638f5ef5601ddf4ea8dc9130c68626
 
 dotenv.config();
 const { SECRET_KEY } = process.env;

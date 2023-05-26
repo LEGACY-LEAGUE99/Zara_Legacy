@@ -13,6 +13,15 @@ const PORT = 5000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+<<<<<<< HEAD
+=======
+app.use(morgan('dev'))
+app.use(cors())
+
+app.use("/auth", authRoute)
+app.use("/products", prodRoute)
+
+>>>>>>> 2a47fa22e6638f5ef5601ddf4ea8dc9130c68626
 
 // Connect to MongoDB
 mongoose.connect('mongodb+srv://messud:azerty123@seniordata.sg77wxf.mongodb.net/?retryWrites=true&w=majority') .then(() => {

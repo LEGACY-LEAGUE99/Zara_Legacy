@@ -7,22 +7,27 @@ import SignUp from './components/SignUp.vue'
 import Products from './components/Products.vue'
 import Compte from './components/Compte.vue'
 import Help from './components/Help.vue'
-<<<<<<< HEAD
-import Contact from './components/Contact.vue'
-    
-</script>
-
-<template>
-  <Help/>
-=======
 import SideBar from './components/SideBar.vue'
 
+// Define the component
+const App = defineComponent({
+  components: {
+    RouterLink,
+    RouterView,
+    Home,
+    Login,
+    SignUp,
+    Products,
+    Compte,
+    Help,
+    SideBar
+  },
+})
 </script>
 
 <template>
-  
-  <SideBar/>
->>>>>>> 578c99b73fd619a7d35a59c9a1e4320a544597f3
-  
- 
+  <div>
+    <!-- Render the SideBar component -->
+    <router-view /> <!-- Render the current route component -->
+  </div>
 </template>

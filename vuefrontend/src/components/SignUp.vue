@@ -136,3 +136,42 @@
 </div>
 </div>
 </template>
+<script>
+import { ref } from 'vue';
+import axios from 'axios';
+import { useRouter } from 'vue-router';
+
+export default {
+  setup() {
+    const router = useRouter();
+    const formData = ref({});
+    const isAdmin = ref(false);
+
+    const handleChange = (e) => {
+      formData.value = {
+        ...formData.value,
+        [e.target.name]: e.target.value,
+      };
+    };
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      try {
+        const formDataWithAdmin = { ...formData.value, is_admin: isAdmin.value };
+        const response = await axios.post('http://localhost:3000/register', formDataWithAdmin);
+        console.log(response.data);
+        router.push('/Login');
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    return {
+      handleChange,
+      handleSubmit,
+      isAdmin,
+    };
+  },
+};
+</script>

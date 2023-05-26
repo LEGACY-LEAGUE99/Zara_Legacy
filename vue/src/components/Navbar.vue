@@ -10,7 +10,7 @@
         <div id="ship">
           <div class="active" @click="navigate('/Products')">Home</div>
           <div></div>
-          <div>HELLO </div>
+        
           <div></div>
           <div @click="navigate('/Search')">SEARCH</div>
         </div>

@@ -9,8 +9,13 @@ import SideBar from '@/components/SideBar.vue';
 import Navbar from '@/components/Navbar.vue';
 import Cart from '@/components/Cart.vue';
 import OneP from '../components/OneP.vue'
+import Search from '@/components/Search.vue';
 
 const routes: Array<RouteRecordRaw> = [
+  {
+    path:'/Search',
+    component:Search
+  },
   {
     path: '/OneProduct',
     component: OneP,

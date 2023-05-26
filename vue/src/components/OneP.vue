@@ -105,7 +105,7 @@ export default defineComponent({
   },
   methods: {
     redirectToAllProducts() {
-      this.$router.push('/All');
+      this.$router.push('/products');
     },
     addToCart() {
       window.location.href = `/cart/${this.product.id}`;

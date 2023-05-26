@@ -1,22 +1,19 @@
 <template>
   <div>
-    <Navbar />
+    <!-- <Navbar /> -->
     <div>
       <img class="img" :src="img" @click="handle" />
-      <div id="main">
-        <div v-for="product in products" :key="product.id">
+      <div id="main" :style="gridStyle">
+        <div v-for="product in products" :key="product.id" class="product">
           <router-link :to="`/OneProduct?product=${product.name}`">
-            <img
-              :src="product.images[1]"
-              alt=""
-            />
+            <img :src="product.images[1]" alt="" style="width: 100%;" />
           </router-link>
-          
+
           <div class="flex">
             <p>{{ product.name }}</p>
             <div>
-              <p style="text-decoration: line-through;">${{ product.price }}</p>
-              <p>{{ product.discount *100}}% discount</p>
+              <p style="text-decoration: line-through; margin: 0;">${{ product.price }}</p>
+              <p style="margin: 0;">{{ product.discount * 100 }}% discount</p>
             </div>
           </div>
         </div>
@@ -26,10 +23,8 @@
   </div>
 </template>
 
-
 <script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue';
-
+import { defineComponent, onMounted, ref, computed } from 'vue';
 import axios from 'axios';
 
 interface Product {
@@ -48,28 +43,29 @@ interface Product {
 
 export default defineComponent({
   name: 'AllProducts',
-  components: {
-  
-  },
+  components: {},
   setup() {
     const products = ref<Product[]>([]);
     const i = ref(1);
-    const img = ref('');
-    
+    const img = ref('https://cdn-icons-gif.flaticon.com/8112/8112604.gif');
 
     const handle = () => {
       i.value += 1;
       if (i.value > 2) {
         i.value = 1;
-        img.value = '';
+        img.value = 'https://cdn-icons-gif.flaticon.com/6416/6416394.gif';
       }
       if (i.value > 0) {
-        img.value = '';
+        img.value = 'https://cdn-icons-gif.flaticon.com/7211/7211809.gif';
       }
       if (i.value === 2) {
-        img.value = '';
+        img.value = 'https://cdn-icons-gif.flaticon.com/7211/7211849.gif';
       }
     };
+
+    const gridStyle = computed(() => {
+      return `display: grid; grid-template-columns: repeat(${i.value}, minmax(220px, 1fr)); gap: 1.8em; width: 80%; margin: 10% auto;`;
+    });
 
     const fetchProducts = async () => {
       try {
@@ -81,17 +77,16 @@ export default defineComponent({
       }
     };
 
-   
-
     onMounted(() => {
       fetchProducts();
     });
 
     return {
       products,
+      i,
       img,
       handle,
-      
+      gridStyle,
     };
   },
 });
@@ -215,13 +210,13 @@ height: 30px;
 margin-left: 1030px;
 border: 1px solid black;
 }
-#main {
+/* #main {
   display: grid;
   grid-template-columns: repeat(3, minmax(220px, 1fr));
   gap: 1.8em;
   width: 80%;
   margin: 10% auto;
-}
+} */
 
 #main > div {
   justify-self: center;

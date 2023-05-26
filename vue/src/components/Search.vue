@@ -11,7 +11,7 @@
           />
   
           <div id="trending_product">
-            <p v-if="searchTerm">Is this what you're looking for?</p>
+            
             <div v-if="searchTerm !== '' && filteredProducts.length > 0">
               <div v-for="product in filteredProducts" :key="product.id" class="product">
                
@@ -33,17 +33,10 @@
                 </div>
               </div>
             </div>
-            <p v-else>No products found.</p>
+       
           </div>
         </div>
-        <!-- <select ref="selectElement" size="1" @focus="handleSelectFocus" @blur="handleSelectBlur">
-          <option value="">Filter</option>
-          <option value="1">First option</option>
-          <option value="2">Second option</option>
-          <option value="3">Third option</option>
-          <option value="4">Fourth option</option>
-          <option value="5">Fifth option</option>
-        </select> -->
+        
       </div>
     </div>
   </template>
@@ -132,84 +125,7 @@
   };
   </script>
   <style scoped>
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
-  user-select: none;
-}
-body{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  width: 100vw;
-  background-color: #eee;
-  padding: 10px;
-}
-select{
-  width: 400px;
-  max-width: 100%;
-  overflow-y: auto;
-  cursor: pointer;
-  padding: 15px 25px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  border: none;
-  outline: none;
-  border-radius: 12px;
-  color: #444;
-  font-size: 18px;
-  box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.10);
-}
-select option{
-  padding: 10px 20px;
-  margin-bottom: 8px;
-  border-radius: 12px;
-  background-color: rgb(238, 238, 238);
-  white-space: pre-wrap;
-  cursor: pointer;
-}
-select option:hover{
-  background-color: rgb(223, 223, 223);
-}
-select option:checked{
-  box-shadow: 0 0 10px 100px #595959 inset;
-}
-select::-webkit-scrollbar-track
-{
-	background-color: #F5F5F5;
-	border-radius: 12px;
-}
-
-select::-webkit-scrollbar
-{
-	width: 8px;
-	background-color: #F5F5F5;
-}
-
-select::-webkit-scrollbar-thumb
-{
-	background-color: rgb(225, 225, 225);
-	border-radius: 12px;
-	background-image: -webkit-linear-gradient(90deg,
-	                                          rgba(160, 160, 160, 0.2) 25%,
-											  transparent 25%,
-											  transparent 50%,
-											  rgba(160, 160, 160, 0.2) 50%,
-											  rgba(160, 160, 160, 0.2) 75%,
-											  transparent 75%,
-											  transparent)
-}
-select.fadeIn {
-  animation: fadeInDown 0.2s;
-}
-select.fadeOut{
-  animation: fadeInUp 0.2s;
-}
+  
   * {
     margin: 0;
     /* font-family: 'PT Sans', sans-serif; */
@@ -290,8 +206,8 @@ select.fadeOut{
   
   /* search baar  */
   #searchbar {
-    margin-top: 1.6em;
-    width: 92%;
+    margin-top: 6em;
+    width: 95%;
     outline: none;
     border: none;
     border-bottom: 1px solid black;
@@ -305,18 +221,10 @@ select.fadeOut{
   
   /* below search baar tranding products  */
   #trending_product {
-    /* border: 1px solid red; */
-    margin-top: 5em;
-width: 99%;
-    /* line-height: 3.5em; */
-    font-size: 0.68em;
-    font-weight: bold;
-    display: grid;
-    grid-template-columns: repeat(1, minmax(220px, 1fr));
-   margin-left:320px
-  
+    border: 1px solid red;
+    position: flex;
+   
 
-    
   }
   #trending_product > :first-child {
     color: black;
@@ -780,12 +688,15 @@ align-self: center;
   
   /* middle image divv  */
   .image_div {
-    width: 28%;
-    /* border: 1px solid green; */
-  }
-  .image_div > img {
-    width: 100%;
-  }
+  width: 30%;
+  grid-column: span 4;
+  /* border: 1px solid green; */
+}
+
+.image_div > img {
+  width: 100%;
+}
+
   
   /* right side product information div   */
   .product_info_rightSide {

@@ -1,72 +1,65 @@
 <template>
-    <div>
-      <!-- <div class="background-video-container">
-        <video v-if="vd" class="background-video" autoplay loop muted>
-          <source :src="vd" type="video/mp4" />
-        </video>
-      </div> -->
-  
-      <div id="header"></div>
-      <div id="container">
-        <div class="left_side_content">
-          <!-- <h4>ZARA MESSY WEEK</h4>
-          <h3>PRODUCT MANAGER</h3>
-          <p>
-            We work with the boys programmes to ensure compliance with safety,
-            health and quality standards for our products.
-          </p>
-          <p>
-            The Greenfeild to Wear 2.0 standard aims to minimise the environmental
-            impact of textile manufacturing. To that end, we have developed
-            Inditex’s The List programme, which helps guarantee both that
-            production processes are
-          </p> -->
-          <p @click="redirectToProducts">View more</p>
-        </div>
-        <div class="image_div">
-            <img
+  <div>
+    <div id="header"></div>
+    <div id="container">
+      <div class="left_side_content">
+        <h4>ZARA MESSY WEEK</h4>
+        <h3>PRODUCT MANAGER</h3>
+        <div class="container">
+          <div class="input-container">
+  <input v-model="gradColor1" @change="updateGradientColor('--grad-color-1', gradColor1)" type="color" class="color-input" />
+  <div id="custom-input-1" :style="{ backgroundColor: gradColor1 }" class="custom"></div>
+</div>
 
-    :src="product.images[currentImageIndex]"
-    alt=""
-    @wheel="changeImage"
-    ref="imgElement"
-  />
-          
-        </div>
-        <div class="product_info_rightSide">
-          <div class="product_name">
-            <h2>{{ product.name }}</h2>
-            <!-- <img :src="product.images[2]" alt="" /> -->
-          </div>
-          <p>{{ product.description }}</p>
-          <p>${{ product.price }}</p>
-          <p>{{ product.discount *100}}% discount</p>
-          <hr />
-          <div class="sizes">
-            -  <select ref="selectElement" size="4" class="select-element">
-          <option value="M">{{ product.availableSizes[1] }}</option>
-          <option value="M">{{ product.availableSizes[0] }}</option>
-          <option value="L">L</option>
-          <option value="XLL">XLL</option>
-        </select>
-          </div>
-  
-          <div class="sizeScale">
-            <p>FIND YOUR SIZE</p>
-            <p>SIZE GUIDE</p>
-          </div>
-          <router-link :to="`/Cart?product=${product.id}`">
-            <button>add to cart</button>
-          </router-link>
-         
-        </div>
+<div class="input-container">
+  <input v-model="gradColor2" @change="updateGradientColor('--grad-color-2', gradColor2)" type="color" class="color-input" />
+  <div id="custom-input-2" :style="{ backgroundColor: gradColor2 }" class="custom"></div>
+</div>
+
+<div class="input-container">
+  <input v-model="gradColor3" @change="updateGradientColor('--grad-color-3', gradColor3)" type="color" class="color-input" />
+  <div id="custom-input-3" :style="{ backgroundColor: gradColor3 }" class="custom"></div>
+</div>
+
+<div class="input-container">
+  <input v-model="gradColor4" @change="updateGradientColor('--grad-color-4', gradColor4)" type="color" class="color-input" />
+  <div id="custom-input-4" :style="{ backgroundColor: gradColor4 }" class="custom"></div>
+</div>
+</div>
+        <p @click="redirectToProducts">View more</p>
       </div>
-      
+      <div class="image_div">
+        <img :src="product.images[currentImageIndex]" alt="" @wheel="changeImage" ref="imgElement" />
+      </div>
+      <div class="product_info_rightSide">
+        <div class="product_name">
+          <h2>{{ product.name }}</h2>
+        </div>
+        <p>{{ product.description }}</p>
+        <p>{{ product.price }} TND</p>
+        <p>{{ product.discount * 100 }}% discount</p>
+        <hr />
+        <div class="sizes">
+          -
+          <select ref="selectElement" size="4" class="select-element">
+            <option v-for="size in product.availableSizes" :key="size" :value="size">{{ size }}</option>
+          </select>
+        </div>
+
+        <div class="sizeScale">
+          <p>FIND YOUR SIZE</p>
+          <p>SIZE GUIDE</p>
+        </div>
+        <router-link :to="`/Cart?product=${product.id}`">
+          <button>add to cart</button>
+        </router-link>
+      </div>
     </div>
-  </template>
-  
-  <script lang="ts">
-import { defineComponent } from 'vue';
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
 import axios from 'axios';
 
 interface Product {
@@ -87,7 +80,6 @@ export default defineComponent({
   name: 'OneP',
   data() {
     return {
-      vd: '',
       currentImageIndex: 0,
       product: {
         name: '',
@@ -100,13 +92,17 @@ export default defineComponent({
         variant: '',
         images: [''],
         discount: 0,
-        id: ''
-      } as Product
+        id: '',
+      } as Product,
+      gradColor1: '#88d1e0',
+      gradColor2: '#0de2db',
+      gradColor3: '#0de599',
+      gradColor4: '#87f2b4',
     };
   },
   methods: {
     redirectToProducts() {
-      window.location.href = "/Products";
+      window.location.href = '/Products';
     },
     changeImage(event: WheelEvent) {
       const delta = Math.sign(event.deltaY);
@@ -124,17 +120,27 @@ export default defineComponent({
         imgElement.style.cursor = cursorStyle;
       }
     },
+    updateGradientColor(variable: string, value: string) {
+  document.documentElement.style.setProperty(variable, value);
+  if (variable === '--grad-color-1') {
+    document.body.style.background = `linear-gradient(65deg, ${value}, var(--grad-color-2), var(--grad-color-3), var(--grad-color-4))`;
+  } else if (variable === '--grad-color-2') {
+    document.body.style.background = `linear-gradient(65deg, var(--grad-color-1), ${value}, var(--grad-color-3), var(--grad-color-4))`;
+  } else if (variable === '--grad-color-3') {
+    document.body.style.background = `linear-gradient(65deg, var(--grad-color-1), var(--grad-color-2), ${value}, var(--grad-color-4))`;
+  } else if (variable === '--grad-color-4') {
+    document.body.style.background = `linear-gradient(65deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3), ${value})`;
+  }
+}
+
   },
   mounted() {
-    this.vd = '';
-    
     const currentUrl = window.location.href;
-    const id = currentUrl.substring(currentUrl.lastIndexOf('/')).split("=")[1];
-    
+    const id = currentUrl.substring(currentUrl.lastIndexOf('/')).split('=')[1];
+
     axios
       .get(`http://localhost:3002/products/name/${id}`)
       .then(response => {
-       
         const productData = response.data[0];
         const obj: Product = {
           name: productData.name,
@@ -147,15 +153,14 @@ export default defineComponent({
           variant: productData.variant,
           images: productData.images,
           discount: productData.discount,
-          id: productData.id
+          id: productData.id,
         };
-        console.log(obj)
         this.product = obj;
       })
       .catch(error => {
         console.error(error);
       });
-  }
+  },
 });
 </script>
 
@@ -163,6 +168,80 @@ export default defineComponent({
 
   
   <style scoped>
+  :root {
+    --grad-color-1: #88d1e0;
+    --grad-color-2: #0de2db;
+    --grad-color-3: #0de599;
+    --grad-color-4: #87f2b4;
+  }
+
+body {
+  background: linear-gradient(65deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3), var(--grad-color-4));
+  width: 100vh;
+  height: 100vh;
+}
+
+.container {
+  position: absolute;
+  left: 18%;
+  top: 70%;
+  transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+}
+
+.color-input {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border: none;
+  outline: none;
+  opacity: 0;
+  margin: 50px;
+}
+
+.custom {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  margin-top: -96px;
+  margin-left: 38px;
+  border: 5px solid rgb(8, 6, 6);
+}
+
+.custom:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 50px 5px #4e4e4e;
+}
+
+.color-input:hover {
+  cursor: pointer;
+}
+
+.color-input:hover + .custom {
+  box-shadow: 0px 0px 50px 5px #4e4e4e;
+}
+
+
+
+/* various id hacks to properly style each input element */
+#grad-input-1 {
+  margin-top: 0;
+}
+
+#custom-input-1 {
+  background-color: var(--grad-color-1);
+}
+
+#custom-input-2 {
+  background-color: var(--grad-color-2);
+}
+
+#custom-input-3 {
+  background-color: var(--grad-color-3);
+}
+
+#custom-input-4 {
+  background-color: var(--grad-color-4);
+}
   .select-element {
   width: 285px; 
   padding: 8px;
@@ -284,59 +363,16 @@ export default defineComponent({
               margin-top: 0.8em;
             }
             
-            .popup{
-            position: absolute;
-            right:0;
-            top:0;
-            width: 30%;
-            background-color: white;
-            height:100vh;
-            overflow: scroll;
-            padding:.5em;
             
-            
-            }
-            
-            .popup img{
-              width:50%;
-            }
-            
-            .popup button{
-              padding:1em;
-              position: sticky;
-              bottom:0;
-            }
-            
-            #popupmain>div{
-              margin-bottom:10%;
-            }
-            
-            
-            
-            .popup .X{
-              position: absolute;
-              top:0;
-              right:0;
-            }
-            
-            .none{
-              display: none;
-            }
-            
-            .flex{
-              display: flex;
-            }
             
             @media only screen and (min-width: 375px) and (max-width: 768px) {
               .prev,
               .next,
-              .text {
-                font-size: 11px;
-              }
+              
             
               .image_div > img {
-                width: 130%;
-                margin-top: 49%;
+                width: 120%;
+                margin-top: 30%;
                 margin-left: -20%;
             }
             

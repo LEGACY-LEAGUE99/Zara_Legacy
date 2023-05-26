@@ -1,34 +1,5 @@
 <template>
     <div>
-      <header>
-        <div id="hambuger">
-          <img
-            src="https://icon-library.com/images/menu-icon-png-3-lines/menu-icon-png-3-lines-16.jpg"
-            alt=""
-            id="hamburgerIcon"
-          />
-        </div>
-        <div id="logohead">
-          <a href="/">
-            <img
-              src="https://logodownload.org/wp-content/uploads/2014/05/zara-logo-1.png"
-              alt=""
-              id="zara_logo"
-            />
-          </a>
-          <div id="ul">
-            <ul>
-              <a href="/help">
-                <li class="log-help">HELP</li>
-              </a>
-              <a href="/cart">
-                <li>CART</li>
-              </a>
-            </ul>
-          </div>
-        </div>
-      </header>
-  
       <div id="container">
         <div id="main">
           <input
@@ -42,18 +13,17 @@
           <div id="trending_product">
             <p v-if="searchTerm">Is this what you're looking for?</p>
             <div v-if="searchTerm !== '' && filteredProducts.length > 0">
-              <div
-                v-for="product in filteredProducts"
-                :key="product.id"
-                class="product"
-              >
-                <div class="image_div">
-                  <img
-                    @click="goToProduct(product.id)"
-                    :src="product.images[2]"
-                    alt=""
-                  />
-                </div>
+              <div v-for="product in filteredProducts" :key="product.id" class="product">
+               
+                    <router-link :to="`/OneProduct?product=${product.name}`">
+                        <div class="image_div">
+            <img
+              :src="product.images[1]"
+              alt=""
+            />
+        </div>
+          </router-link>
+                
                 <div class="product_info_rightSide">
                   <div class="product_name">
                     <h2>{{ product.name }}</h2>
@@ -66,25 +36,27 @@
             <p v-else>No products found.</p>
           </div>
         </div>
-        <div id="searchProd" class="grid"></div>
-        <div id="shirt-products" class="none grid"></div>
-        <div id="shoes-products" class="none grid"></div>
-        <div id="womenAccessories-products" class="none grid"></div>
-        <div id="women-jacket" class="none grid"></div>
-        <div id="footer_section">
-          <div id="about"></div>
-        </div>
+        <!-- <select ref="selectElement" size="1" @focus="handleSelectFocus" @blur="handleSelectBlur">
+          <option value="">Filter</option>
+          <option value="1">First option</option>
+          <option value="2">Second option</option>
+          <option value="3">Third option</option>
+          <option value="4">Fourth option</option>
+          <option value="5">Fifth option</option>
+        </select> -->
       </div>
     </div>
   </template>
+
+
   <script lang="ts">
-  import axios, { AxiosResponse } from 'axios';
+  import axios, { type AxiosResponse } from 'axios';
   
   interface Product {
     id: number;
     name: string;
     category: string;
-    images: [string];
+    images: string[number];
     description: string;
     price: number;
     size: string;
@@ -101,6 +73,38 @@
       this.fetchData();
     },
     methods: {
+        handleSelectFocus(): void {
+      const select = this.$refs.selectElement as HTMLSelectElement;
+      select.size = 5;
+      select.classList.add('fadeIn');
+      select.classList.remove('fadeOut');
+      select.style.backgroundColor = '#FFF';
+    },
+    handleSelectBlur(): void {
+      const select = this.$refs.selectElement as HTMLSelectElement;
+      select.size = 1;
+      select.classList.add('fadeOut');
+      select.classList.remove('fadeIn');
+      select.style.backgroundColor = '#FFF';
+    },
+    handleSelectChange(): void {
+      const select = this.$refs.selectElement as HTMLSelectElement;
+      select.size = 1;
+      select.blur();
+      select.style.backgroundColor = '#FFF';
+    },
+    handleSelectMouseOver(): void {
+      const select = this.$refs.selectElement as HTMLSelectElement;
+      if (select.size === 1) {
+        select.style.backgroundColor = 'rgb(247, 247, 247)';
+      }
+    },
+    handleSelectMouseOut(): void {
+      const select = this.$refs.selectElement as HTMLSelectElement;
+      if (select.size === 1) {
+        select.style.backgroundColor = '#FFF';
+      }
+    },
       async fetchData() {
         try {
           const response: AxiosResponse<Product[]> = await axios.get('http://localhost:3002/products/All/Woman');
@@ -128,6 +132,84 @@
   };
   </script>
   <style scoped>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  user-select: none;
+}
+body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #eee;
+  padding: 10px;
+}
+select{
+  width: 400px;
+  max-width: 100%;
+  overflow-y: auto;
+  cursor: pointer;
+  padding: 15px 25px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  outline: none;
+  border-radius: 12px;
+  color: #444;
+  font-size: 18px;
+  box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.10);
+}
+select option{
+  padding: 10px 20px;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  background-color: rgb(238, 238, 238);
+  white-space: pre-wrap;
+  cursor: pointer;
+}
+select option:hover{
+  background-color: rgb(223, 223, 223);
+}
+select option:checked{
+  box-shadow: 0 0 10px 100px #595959 inset;
+}
+select::-webkit-scrollbar-track
+{
+	background-color: #F5F5F5;
+	border-radius: 12px;
+}
+
+select::-webkit-scrollbar
+{
+	width: 8px;
+	background-color: #F5F5F5;
+}
+
+select::-webkit-scrollbar-thumb
+{
+	background-color: rgb(225, 225, 225);
+	border-radius: 12px;
+	background-image: -webkit-linear-gradient(90deg,
+	                                          rgba(160, 160, 160, 0.2) 25%,
+											  transparent 25%,
+											  transparent 50%,
+											  rgba(160, 160, 160, 0.2) 50%,
+											  rgba(160, 160, 160, 0.2) 75%,
+											  transparent 75%,
+											  transparent)
+}
+select.fadeIn {
+  animation: fadeInDown 0.2s;
+}
+select.fadeOut{
+  animation: fadeInUp 0.2s;
+}
   * {
     margin: 0;
     /* font-family: 'PT Sans', sans-serif; */

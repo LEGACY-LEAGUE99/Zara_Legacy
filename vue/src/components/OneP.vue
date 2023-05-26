@@ -1,15 +1,15 @@
 <template>
     <div>
-      <div class="background-video-container">
+      <!-- <div class="background-video-container">
         <video v-if="vd" class="background-video" autoplay loop muted>
           <source :src="vd" type="video/mp4" />
         </video>
-      </div>
+      </div> -->
   
       <div id="header"></div>
       <div id="container">
         <div class="left_side_content">
-          <h4>ZARA MESSY WEEK</h4>
+          <!-- <h4>ZARA MESSY WEEK</h4>
           <h3>PRODUCT MANAGER</h3>
           <p>
             We work with the boys programmes to ensure compliance with safety,
@@ -20,7 +20,7 @@
             impact of textile manufacturing. To that end, we have developed
             Inditex’s The List programme, which helps guarantee both that
             production processes are
-          </p>
+          </p> -->
           <p @click="redirectToAllProducts">View more</p>
         </div>
         <div class="image_div">
@@ -33,35 +33,28 @@
           </div>
           <p>{{ product.description }}</p>
           <p>${{ product.price }}</p>
-          <p>INCLUDES TVA</p>
+          <p>{{ product.discount *100}}% discount</p>
           <hr />
           <div class="sizes">
-            <p>{{ product.availableSizes.join(', ') }}</p>
+            -  <select ref="selectElement" size="4" class="select-element">
+          <option value="M">{{ product.availableSizes[1] }}</option>
+          <option value="M">{{ product.availableSizes[0] }}</option>
+          <option value="L">L</option>
+          <option value="XLL">XLL</option>
+        </select>
           </div>
   
           <div class="sizeScale">
             <p>FIND YOUR SIZE</p>
             <p>SIZE GUIDE</p>
           </div>
-          <button @click="addToCart">add to cart</button>
-  
-          <p>{{ product.discount }}</p>
-          <p>DELIVERY, EXCHANGES AND RETURNS</p>
+          <router-link :to="`/Cart?product=${product.id}`">
+            <button>add to cart</button>
+          </router-link>
+         
         </div>
       </div>
-      <div id="footer"></div>
-  
-      <div id="popup" class="popup none">
-        <h1>CART</h1>
-        <h1 class="X">X</h1>
-        <div id="popupmain">
-          <div class="flex">
-            <img :src="product.images[0]" alt="" />
-            <div>{{ product.name }}</div>
-            <div>{{ product.price }}</div>
-          </div>
-        </div>
-      </div>
+      
     </div>
   </template>
   
@@ -107,12 +100,6 @@ export default defineComponent({
     redirectToAllProducts() {
       this.$router.push('/products');
     },
-    addToCart() {
-      window.location.href = `/cart/${this.product.id}`;
-    },
-    addToBag() {
-      window.location.href = `/cart/${this.product.id}`;
-    }
   },
   mounted() {
     this.vd = '';
@@ -152,6 +139,18 @@ export default defineComponent({
 
   
   <style scoped>
+  .select-element {
+  width: 200px; 
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.select-element option {
+  padding: 8px;
+}
+
 * {
               margin: 0;
               padding: 0;

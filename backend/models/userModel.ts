@@ -19,9 +19,9 @@ const userSchema = new mongoose.Schema<UserDocument>(
     lname: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    balance: { type: Number, required: true },
-    cart: { type: String, required: true },
-    adresse:{ type: String, required: true },
+    balance: { type: Number, required: false },
+    cart: { type: String, required: false },
+    adresse:{ type: String, required: false },
     is_admin: { type: Boolean },
   },
   {

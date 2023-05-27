@@ -59,9 +59,17 @@ const login = async (req: Request, res: Response): Promise<Response> => {
     return res.status(400).send({ message: err.message });
   }
 };
+const getAllUsers = async (_req: Request, res: Response) => {
+  try {
+    const users = await User.find();
+    return res.status(200).send({ users, status: true });
+  } catch (err: any) {
+    return res.status(400).send({ message: err.message });
+  }
+};
 
 const isAdmin = (user: UserDocument): boolean => {
   return user.is_admin;
 };
 
-export { register, login, isAdmin };
+export { register, login, getAllUsers , isAdmin };

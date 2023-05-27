@@ -6,6 +6,7 @@ import Products from '../components/Products.vue';
 import Compte from '../components/Compte.vue';
 import Help from '../components/Help.vue';
 import SideBar from '../components/SideBar.vue';
+import DashboardVue from '@/components/Dashboard.vue';
 
 
 const routes = [
@@ -43,6 +44,11 @@ const routes = [
     path: '/SideBar',
     name: 'SideBar',
     component: SideBar
+  } ,
+  {
+    path: '/Dashboard',
+    name: 'Dashboard',
+    component: DashboardVue
   }
 ];
 

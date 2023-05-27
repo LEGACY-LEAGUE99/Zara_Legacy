@@ -1,11 +1,15 @@
 
 import express from 'express';
-import  Helps from '../controllers/HelpController';
+import HelpController from '../controllers/HelpController';
 
 const router = express.Router();
 
 
-router.get('/help', Helps);
-router.get('/help/:titel', Helps);
+router.get('/help/:topic', HelpController.Helps);
+router.get('/segg', HelpController.Segg);
 
 export default router;
+
+
+
+

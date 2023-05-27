@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import auth from './routes/UserRoute'
 import help from './routes/HelpRoute'
 import dotenv from 'dotenv'
+import cors from 'cors'
 dotenv.config();
 
  
@@ -13,6 +14,7 @@ const PORT = 5000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors())
 
 // Connect to MongoDB
 mongoose.connect('mongodb+srv://messud:azerty123@seniordata.sg77wxf.mongodb.net/?retryWrites=true&w=majority') .then(() => {

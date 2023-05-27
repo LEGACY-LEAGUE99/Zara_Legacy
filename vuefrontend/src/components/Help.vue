@@ -1,5 +1,6 @@
 <template>
-<div>
+ 
+  <div>
     <SideBar/>
     <input type="text" v-model="searchTitle" placeholder="Search" />
     <button @click="searchHelp">Search</button>
@@ -13,6 +14,8 @@
     </div>
   </div>
 </template>
+
+
 
 <script lang="ts">
 import { defineComponent } from 'vue';
@@ -60,8 +63,3 @@ export default defineComponent({
     components: { SideBar }
 });
 </script>
-
-<style scoped>
-
-
-</style>

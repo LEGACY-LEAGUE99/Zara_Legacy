@@ -1,4 +1,10 @@
 <template>
+        <div class="logo">
+        <a href="/">
+          <img src="https://logodownload.org/wp-content/uploads/2014/05/zara-logo-1.png" alt="zaralogo" />
+        </a>
+      </div>
+
    <form @submit="handleSubmit" class="container-login">
      <div class="Left-login-form">
        <h3 class="login-heading">LOGIN IN TO YOUR ACCOUNT</h3>
@@ -90,25 +96,29 @@
      </div>
    </div>
  </template>
+
+
  
- <script>
- import { ref } from 'vue';
+ <script lang="ts" >
+
+ import { ref , defineComponent } from 'vue';
  import axios from 'axios';
  import { useRouter } from 'vue-router';
  
- export default {
+ 
+ export default defineComponent ({
    setup() {
      const router = useRouter();
      const formData = ref({ email: '', password: '' });
  
-     const handleChange = (e) => {
+     const handleChange = (e :any) => {
        formData.value = {
          ...formData.value,
          [e.target.name]: e.target.value,
        };
      };
  
-     const handleSubmit = async (e) => {
+     const handleSubmit = async (e : any) => {
        e.preventDefault();
  
        try {
@@ -118,7 +128,7 @@
          localStorage.setItem('userName', response.data.user.fname);
          localStorage.setItem('admin', response.data.user.is_admin);
          router.push('/');
-       } catch (error) {
+       } catch (error : any) {
          console.error('Login failed:', error.message);
        }
      };
@@ -128,10 +138,27 @@
        handleSubmit,
      };
    },
- };
+ })
  </script>
  
  <style scoped>
+ .logo{
+    display:flex;
+    position: relative;
+     left: 200px;
+}
+.logo{
+    width: 210px;
+    margin-top: 10px;
+    margin-left: 8%;
+    margin-bottom: 10px;
+}
+.logo>a>img{
+    width: 100%;
+    position: absolute;
+  z-index: 2;
+}
+
  .container-login {
     width: 60%;
     display: flex;

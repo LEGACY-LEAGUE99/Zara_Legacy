@@ -3,9 +3,14 @@ import Home from '../components/Home.vue';
 import Login from '../components/Login.vue';
 import SignUp from '../components/SignUp.vue';
 import Products from '../components/Products.vue';
-import Compte from '../components/Compte.vue';
 import Help from '../components/Help.vue';
 import SideBar from '../components/SideBar.vue';
+import DashboardVue from '@/components/Dashboard.vue';
+import CartVue from '../components/Cart.vue';
+import OnePVue from '../components/OneP.vue';
+import SearchVue from '../components/Search.vue';
+import NavbarVue from '@/components/Navbar.vue';
+import FilterVue from '@/components/Filter.vue';
 
 
 const routes = [
@@ -24,16 +29,13 @@ const routes = [
     name: 'SignUp',
     component: SignUp
   },
+   
   {
     path: '/Products',
     name: 'Products',
     component: Products
   },
-  {
-    path: '/Compte',
-    name: 'Compte',
-    component: Compte
-  },
+ 
   {
     path: '/Help',
     name: 'Help',
@@ -43,6 +45,33 @@ const routes = [
     path: '/SideBar',
     name: 'SideBar',
     component: SideBar
+  } ,
+  {
+    path: '/Dashboard',
+    name: 'Dashboard',
+    component: DashboardVue
+  } ,
+  {
+    path:'/Search',
+    component:SearchVue
+  },
+  {
+    path: '/OneProduct',
+    component: OnePVue
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: CartVue
+  }
+  ,{
+    path: '/Navbar',
+    name: 'Navbar',
+    component: NavbarVue
+  },{
+    path: '/Filter',
+    name: 'Filter',
+    component: FilterVue
   }
 ];
 

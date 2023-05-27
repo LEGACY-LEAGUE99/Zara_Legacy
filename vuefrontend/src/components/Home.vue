@@ -1,6 +1,8 @@
 <template>
   <div class="app">
-   <SideBar />
+    <NavbarVue/>
+   <SideBar id="sidebar" />
+   
     <div class="content">
       <div class="slideshow">
         <img v-for="image in slideshowImages" :key="image" :src="image" :class="{ 'active': activeImage === image }" />
@@ -9,9 +11,13 @@
   </div>
 </template>
 
+
 <script lang="ts">
+
+
 import { defineComponent, ref } from 'vue';
 import SideBar from './SideBar.vue';
+import  NavbarVue from './Navbar.vue';
 
 
 export default defineComponent({
@@ -36,7 +42,7 @@ export default defineComponent({
             slideshowImages,
         };
     },
-    components: { SideBar }
+    components: { SideBar ,NavbarVue }
 });
 </script>
 
@@ -56,7 +62,7 @@ export default defineComponent({
 }
 
 .slideshow img {
-  position: absolute;
+  position:fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -77,4 +83,6 @@ export default defineComponent({
   transition: transform 0.3s ease;
   transform: translateX(-100%);
 }
+
+
 </style>

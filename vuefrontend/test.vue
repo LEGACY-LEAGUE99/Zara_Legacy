@@ -60,13 +60,6 @@
               { id: 6, title: 'TROUSERS', showSuboptions: false },
               { id: 7, title: 'SHOES', showSuboptions: false },
               { id: 8, title: 'BAGS', showSuboptions: false },
-              { id: 11, title: 'JACKETS', showSuboptions: false },
-              { id: 12, title: 'TROUSERS', showSuboptions: false },
-              { id: 13, title: 'JEANS', showSuboptions: false },
-              { id: 13, title: 'SHORTS', showSuboptions: false },
-              { id: 13, title: 'HOODIES', showSuboptions: false },
-              { id: 13, title: 'BASICS', showSuboptions: false },
-              { id: 13, title: 'T-SHIRTS', showSuboptions: false }
             ],
           },
           {
@@ -152,10 +145,7 @@
   }
   
   .toggle-button {
-    position: absolute;
-    z-index: 10;
-    left: -190px;
-    padding: 100;
+    padding: 10px;
     cursor: pointer;
     border: none;
     background: none;
@@ -163,9 +153,6 @@
   }
   
   .options {
-    position: relative;
-    left: -230px;
-    bottom: -80px;
     background: none;
     border-style: none;
     background-color: aliceblue;

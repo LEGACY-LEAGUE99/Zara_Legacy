@@ -51,7 +51,7 @@ export default defineComponent({
 
     const handle = () => {
       i.value += 1;
-      if (i.value > 2) {
+      if (i.value > 3) {
         i.value = 1;
         img.value = 'https://cdn-icons-gif.flaticon.com/6416/6416394.gif';
       }

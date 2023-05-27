@@ -41,7 +41,7 @@
         <hr />
         <div class="sizes">
           -
-          <select ref="selectElement" size="4" class="select-element">
+          <select ref="selectElement" size="3" class="select-element">
             <option v-for="size in product.availableSizes" :key="size" :value="size">{{ size }}</option>
           </select>
         </div>
@@ -364,7 +364,7 @@ body {
             }
             
             
-            
+/*             
             @media only screen and (min-width: 375px) and (max-width: 768px) {
               .prev,
               .next,
@@ -377,7 +377,7 @@ body {
             }
             
             
-            }
+            } */
             
             @media only screen and (min-width: 0px) and (max-width: 390px) {
               #bookVdo {
@@ -385,39 +385,8 @@ body {
                 width: 750px;
                 height: 700px;
               }
-              .slideshow-container {
-                width: 80%;
-                /* position: relative; */
-                margin-top: 10%;
-                font-size: 20px;
-                height: 700px;
-                margin-left: 25%;
-                margin-bottom: 15%;
-              }
-              .rightoptions p,
-              #search-input {
-                font-size: 8px;
-              }
-              #footer a {
-                font-size: 13px;
-              }
+
             
-              .logo img {
-                padding: 2px 0px 0px;
-                display: inline;
-                margin-left: 30%;
-                /* top: 26px; */
-                margin-top: -71px;
-                width: 40%;
-              }
-            
-              body{
-                line-height:1.5em;
-              }
-            
-              .popup{
-              width: 50%;
-            }
             
             
             
@@ -432,10 +401,6 @@ body {
               
             }
             
-            .image_div {
-              width: 100%;
-              /* border: 1px solid green; */
-            }
             
             #container{
               flex-direction: column

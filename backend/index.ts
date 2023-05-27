@@ -5,6 +5,7 @@ import Mongoose from 'mongoose';
 import morgan from 'morgan'
 import authRoute from './routes/authRoute';
 import prodRoute from './routes/prodRoute';
+import cartRoute from './routes/cart'
 import user from './routes/user'
 import nom from './routes/nom'
 
@@ -24,6 +25,7 @@ app.use(cors())
 
 app.use("/auth", authRoute)
 app.use("/products", prodRoute)
+app.use('/product',cartRoute)
 
 
 // Connect to MongoDB

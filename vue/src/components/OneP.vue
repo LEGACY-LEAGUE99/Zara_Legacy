@@ -101,6 +101,24 @@ export default defineComponent({
     };
   },
   methods: {
+    addToCart(productId: any) {
+      const userId = 'YOUR_USER_ID';
+      const url = 'http://localhost:3002/product/cart/add';
+      const payload = {
+        userId,
+        productId
+      };
+
+      axios.post(url, payload)
+        .then(response => {
+          console.log(response.data); 
+          
+        })
+        .catch(error => {
+          console.error('Error adding product to cart:', error);
+       
+        })
+      },
     redirectToProducts() {
       window.location.href = '/Products';
     },

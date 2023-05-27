@@ -7,8 +7,10 @@ export interface UserDocument extends Document {
   receivesEmails: boolean;
   balance: number;
   cart: string;
-  adresse: string;
   products: Array<Mongoose.Types.ObjectId>;
+  adresse:string
+  is_admin: boolean;
+ 
 }
 
 const UserSchema: Schema<UserDocument> = new Schema({
@@ -20,6 +22,7 @@ const UserSchema: Schema<UserDocument> = new Schema({
   cart: String,
   adresse: String,
   products: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
+  is_admin: { type: Boolean },
 });
 
 export const User = Mongoose.model<UserDocument>('User', UserSchema);

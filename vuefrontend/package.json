@@ -10,6 +10,7 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false"
   },
   "dependencies": {
+    "bootstrap-vue": "^2.23.1",
     "@types/axios": "^0.14.0",
     "@types/jwt-decode": "^3.1.0",
     "axios": "^1.4.0",

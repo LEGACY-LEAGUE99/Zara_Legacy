@@ -1,8 +1,8 @@
 import 'dotenv/config'
 import express, { Express, Request, Response } from 'express';
-import bodyParser from 'body-parser';
+
 import Mongoose from 'mongoose';
-import morgan from 'morgan'
+
 import authRoute from './routes/UserRoute';
 import prodRoute from './routes/prodRoute';
 import cartRoute from './routes/cart'
@@ -23,7 +23,7 @@ app.use(cors())
 app.use("/auth", authRoute)
 app.use("/products", prodRoute)
 app.use('/product',cartRoute)
-app.use('help',helpRoute)
+app.use('/',helpRoute)
 
 
 // Connect to MongoDB

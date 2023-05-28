@@ -1,6 +1,8 @@
+// authController.ts
+
 import { Request, Response } from "express";
 import User, { UserDocument } from "../models/UserModel";
-import jwt from "jsonwebtoken" ;
+import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -56,9 +58,10 @@ const login = async (req: Request, res: Response): Promise<Response> => {
 
     return res.status(200).send({ user, token, status: true });
   } catch (err: any) {
-    return res.status(400).send({ message: err.message });
+    return res.status(400).send({ message: err});
   }
 };
+
 const getAllUsers = async (_req: Request, res: Response) => {
   try {
     const users = await User.find();
@@ -72,4 +75,4 @@ const isAdmin = (user: UserDocument): boolean => {
   return user.is_admin;
 };
 
-export { register, login, getAllUsers , isAdmin };
+export { register, login, getAllUsers, isAdmin };

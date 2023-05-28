@@ -43,7 +43,7 @@ export default defineComponent({
                 this.isLoading = true;
                 this.errorMessage = "";
                 this.helpPage = null;
-                const response = await axios.get(`http://localhost:3000/help/${this.searchTitle}`);
+                const response = await axios.get(`http://localhost:3002/help/${this.searchTitle}`);
                 this.helpPage = response.data;
                 console.log(this.helpPage.answer);
             }

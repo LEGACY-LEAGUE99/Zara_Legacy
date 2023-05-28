@@ -60,7 +60,7 @@
     </div>
   </template>
   
-  <script lang="ts">
+   <script lang="ts">
   import { defineComponent } from 'vue';
   
   interface User {
@@ -116,7 +116,7 @@
       };
     },
   });
-  </script>
+  </script> 
   
   <style scoped>
   h1 {

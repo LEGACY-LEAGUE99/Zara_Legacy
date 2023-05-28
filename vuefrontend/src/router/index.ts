@@ -22,7 +22,7 @@ const routes = [
   { path: '/help', component: HelpVue },
   { path: '/login', component: LoginVue },
   { path: '/navbar', component: NavbarVue },
-  { path: '/onep', component: OnePVue },
+  { path: '/OneProduct', component: OnePVue },
   { path: '/products', component: ProductsVue },
   { path: '/search', component: SearchVue },
   { path: '/sidebar', component: SideBarVue },
@@ -30,7 +30,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });
 

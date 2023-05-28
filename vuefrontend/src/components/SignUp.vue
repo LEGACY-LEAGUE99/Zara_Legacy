@@ -159,7 +159,7 @@ export default {
 
       try {
         const formDataWithAdmin = { ...formData.value, is_admin: isAdmin.value };
-        const response = await axios.post('http://localhost:3000/register', formDataWithAdmin);
+        const response = await axios.post('http://localhost:3002/auth/register', formDataWithAdmin);
         console.log(response.data);
         router.push('/Login');
       } catch (error) {

@@ -112,7 +112,7 @@
        e.preventDefault();
  
        try {
-         const response = await axios.post('http://localhost:3000/login', formData.value);
+         const response = await axios.post('http://localhost:3002/auth/login', formData.value);
          console.log('Login successful:', response.data);
          console.log(response.data.user.fname);
          localStorage.setItem('userName', response.data.user.fname);

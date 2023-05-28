@@ -8,6 +8,7 @@ import Products from './components/Products.vue'
 import Compte from './components/Compte.vue'
 import Help from './components/Help.vue'
 import SideBar from './components/SideBar.vue'
+import Navbar from './components/Navbar.vue'
 
 // Define the component
 const App = defineComponent({
@@ -27,6 +28,7 @@ const App = defineComponent({
 
 <template>
   <div>
+    <Navbar/>
     <!-- Render the SideBar component -->
     <router-view /> <!-- Render the current route component -->
   </div>

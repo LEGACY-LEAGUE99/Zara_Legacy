@@ -6,12 +6,22 @@ export interface UserDocument extends Document {
   lname: string;
   email: string;
   password: string;
-  balance: number,
-  cart: string,
-  adresse:string
+  balance: number;
+  cart: CartItem[];
+  adresse: string;
   is_admin: boolean;
   checkPassword(password: string): boolean;
 }
+
+interface CartItem {
+  name: string;
+  quantity: number;
+}
+
+const cartItemSchema = new mongoose.Schema<CartItem>({
+  name: { type: String, required: true },
+  quantity: { type: Number, required: true },
+});
 
 const userSchema = new mongoose.Schema<UserDocument>(
   {
@@ -20,8 +30,8 @@ const userSchema = new mongoose.Schema<UserDocument>(
     email: { type: String, required: true },
     password: { type: String, required: true },
     balance: { type: Number, required: false },
-    cart: { type: String, required: false },
-    adresse:{ type: String, required: false },
+    cart: { type: [cartItemSchema], required: false },
+    adresse: { type: String, required: false },
     is_admin: { type: Boolean },
   },
   {

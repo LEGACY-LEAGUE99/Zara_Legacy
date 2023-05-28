@@ -1,6 +1,5 @@
 <template>
   <div>
-    <NavbarVue class="nav"/> 
     <div id="header"></div>
     <div id="container">
       <div class="left_side_content">
@@ -62,8 +61,6 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import axios from 'axios';
-import NavbarVue from './Navbar.vue';
-
 
 interface Product {
   name: string;
@@ -80,93 +77,90 @@ interface Product {
 }
 
 export default defineComponent({
-  components: { NavbarVue } ,
-    name: "OneP",
-    data() {
-        return {
-            currentImageIndex: 0,
-            product: {
-                name: "",
-                description: "",
-                availableSizes: [""],
-                price: 0,
-                quantity: 0,
-                category: "",
-                subCategory: "",
-                variant: "",
-                images: [""],
-                discount: 0,
-                id: "",
-            } as Product,
-            gradColor1: "#88d1e0",
-            gradColor2: "#0de2db",
-            gradColor3: "#0de599",
-            gradColor4: "#87f2b4",
+  name: 'OneP',
+  data() {
+    return {
+      currentImageIndex: 0,
+      product: {
+        name: '',
+        description: '',
+        availableSizes: [''],
+        price: 0,
+        quantity: 0,
+        category: '',
+        subCategory: '',
+        variant: '',
+        images: [''],
+        discount: 0,
+        id: '',
+      } as Product,
+      gradColor1: '#88d1e0',
+      gradColor2: '#0de2db',
+      gradColor3: '#0de599',
+      gradColor4: '#87f2b4',
+    };
+  },
+  methods: {
+    redirectToProducts() {
+      window.location.href = '/Products';
+    },
+    changeImage(event: WheelEvent) {
+      const delta = Math.sign(event.deltaY);
+      this.currentImageIndex = (this.currentImageIndex + delta + this.product.images.length) % this.product.images.length;
+
+      if (delta > 0) {
+        this.setCursorDPI('zoom-out');
+      } else if (delta < 0) {
+        this.setCursorDPI('zoom-in');
+      }
+    },
+    setCursorDPI(cursorStyle: string) {
+      const imgElement = this.$refs.imgElement as HTMLImageElement;
+      if (imgElement) {
+        imgElement.style.cursor = cursorStyle;
+      }
+    },
+    updateGradientColor(variable: string, value: string) {
+  document.documentElement.style.setProperty(variable, value);
+  if (variable === '--grad-color-1') {
+    document.body.style.background = `linear-gradient(65deg, ${value}, var(--grad-color-2), var(--grad-color-3), var(--grad-color-4))`;
+  } else if (variable === '--grad-color-2') {
+    document.body.style.background = `linear-gradient(65deg, var(--grad-color-1), ${value}, var(--grad-color-3), var(--grad-color-4))`;
+  } else if (variable === '--grad-color-3') {
+    document.body.style.background = `linear-gradient(65deg, var(--grad-color-1), var(--grad-color-2), ${value}, var(--grad-color-4))`;
+  } else if (variable === '--grad-color-4') {
+    document.body.style.background = `linear-gradient(65deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3), ${value})`;
+  }
+}
+
+  },
+  mounted() {
+    const currentUrl = window.location.href;
+    const id = currentUrl.substring(currentUrl.lastIndexOf('/')).split('=')[1];
+
+    axios
+      .get(`http://localhost:3000/products/name/${id}`)
+      .then(response => {
+        const productData = response.data[0];
+        const obj: Product = {
+          name: productData.name,
+          description: productData.description,
+          availableSizes: productData.availableSizes,
+          price: productData.price,
+          quantity: productData.quantity,
+          category: productData.category,
+          subCategory: productData.subCategory,
+          variant: productData.variant,
+          images: productData.images,
+          discount: productData.discount,
+          id: productData.id,
         };
-    },
-    methods: {
-        redirectToProducts() {
-            window.location.href = "/Products";
-        },
-        changeImage(event: WheelEvent) {
-            const delta = Math.sign(event.deltaY);
-            this.currentImageIndex = (this.currentImageIndex + delta + this.product.images.length) % this.product.images.length;
-            if (delta > 0) {
-                this.setCursorDPI("zoom-out");
-            }
-            else if (delta < 0) {
-                this.setCursorDPI("zoom-in");
-            }
-        },
-        setCursorDPI(cursorStyle: string) {
-            const imgElement = this.$refs.imgElement as HTMLImageElement;
-            if (imgElement) {
-                imgElement.style.cursor = cursorStyle;
-            }
-        },
-        updateGradientColor(variable: string, value: string) {
-            document.documentElement.style.setProperty(variable, value);
-            if (variable === "--grad-color-1") {
-                document.body.style.background = `linear-gradient(65deg, ${value}, var(--grad-color-2), var(--grad-color-3), var(--grad-color-4))`;
-            }
-            else if (variable === "--grad-color-2") {
-                document.body.style.background = `linear-gradient(65deg, var(--grad-color-1), ${value}, var(--grad-color-3), var(--grad-color-4))`;
-            }
-            else if (variable === "--grad-color-3") {
-                document.body.style.background = `linear-gradient(65deg, var(--grad-color-1), var(--grad-color-2), ${value}, var(--grad-color-4))`;
-            }
-            else if (variable === "--grad-color-4") {
-                document.body.style.background = `linear-gradient(65deg, var(--grad-color-1), var(--grad-color-2), var(--grad-color-3), ${value})`;
-            }
-        }
-    },
-    mounted() {
-        const currentUrl = window.location.href;
-        const id = currentUrl.substring(currentUrl.lastIndexOf("/")).split("=")[1];
-        axios
-            .get(`http://localhost:3000/getAll/name/${id}`)
-            .then(response => {
-            const productData = response.data[0];
-            const obj: Product = {
-                name: productData.name,
-                description: productData.description,
-                availableSizes: productData.availableSizes,
-                price: productData.price,
-                quantity: productData.quantity,
-                category: productData.category,
-                subCategory: productData.subCategory,
-                variant: productData.variant,
-                images: productData.images,
-                discount: productData.discount,
-                id: productData.id,
-            };
-            this.product = obj;
-        })
-            .catch(error => {
-            console.error(error);
-        });
-    },
-   
+        this.product = obj;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  },
 });
 </script>
 

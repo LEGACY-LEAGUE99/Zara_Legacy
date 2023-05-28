@@ -1,5 +1,5 @@
 import express, { Router } from "express";
-import { register, login, getAllUsers , } from "../controllers/UserController";
+import { register, login, getAllUsers , AddtoCard } from "../controllers/UserController";
 
 const router: Router = express.Router();
 
@@ -10,5 +10,6 @@ router.post("/register", register);
 router.post("/login", login);
 
 router.get("/users" , getAllUsers)
+router.post("/api/users/:userId/cart" , AddtoCard)
 
 export default router;

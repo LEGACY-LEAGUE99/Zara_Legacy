@@ -11,6 +11,7 @@ import OnePVue from '../components/OneP.vue';
 import SearchVue from '../components/Search.vue';
 import NavbarVue from '@/components/Navbar.vue';
 import FilterVue from '@/components/Filter.vue';
+import InfoVue from '@/components/Info.vue';
 
 
 const routes = [
@@ -72,6 +73,11 @@ const routes = [
     path: '/Filter',
     name: 'Filter',
     component: FilterVue
+  } ,
+  {
+    path: '/Info',
+    name: 'Info',
+    component: InfoVue
   }
 ];
 

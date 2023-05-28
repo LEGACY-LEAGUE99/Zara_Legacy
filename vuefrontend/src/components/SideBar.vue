@@ -6,7 +6,7 @@
         </button>
         <transition name="slide">
           <div v-if="showOptions" class="options">
-            <ul class="options-list">
+            <ul class="options-list"> 
               <li v-for="option in options" :key="option.id" class="option">
                 <button class="option-button" @click="toggleSuboptions(option)">
                   {{ option.title }}
@@ -212,5 +212,9 @@
   .slide-leave-to {
     transform: translateX(-100%);
   }
+
+  
+
+
   </style>
   

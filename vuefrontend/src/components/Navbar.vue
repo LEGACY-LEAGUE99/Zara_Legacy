@@ -10,6 +10,7 @@
         <div class="navbar-right">
           <input id="search" type="text" placeholder="SEARCH" />
           <button id="cart" class="button">Card</button>
+         <a href="/Info"> <button id="cart" class="button">Info</button> </a>
           <template v-if="userName">
             <div class="dropdown">
               <button class="button" id="un" @click="toggleDropdown">

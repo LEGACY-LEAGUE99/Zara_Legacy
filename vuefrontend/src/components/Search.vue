@@ -9,7 +9,7 @@
             v-model="searchTerm"
             id="searchbar"
             @input="handleSearch"
-            placeholder="SEARCH HERE"
+            placeholder="SEARCH FOR AN ITEM , COLOR , COLLECTION"
           />
   
           <div id="trending_product">

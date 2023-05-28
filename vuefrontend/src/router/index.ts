@@ -13,8 +13,6 @@ import NavbarVue from '@/components/Navbar.vue';
 import FilterVue from '@/components/Filter.vue';
 import InfoVue from '@/components/Info.vue';
 import Dash from '@/components/Dash.vue';
-import itemsVue from '@/components/items.vue';
-import one from '@/components/one.vue';
 
 
 const routes = [
@@ -81,18 +79,6 @@ const routes = [
     path: '/Info',
     name: 'Info',
     component: InfoVue
-  } ,
-  {
-    path: '/Items',
-    name: 'Items',
-    component: itemsVue
-
-  },
-  {
-    path: '/items/:itemId',
-    name: 'one',
-    component: one
-
   }
 ];
 

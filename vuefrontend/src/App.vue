@@ -14,8 +14,6 @@ import Navbar from './components/Navbar.vue'
 import Filter from './components/Filter.vue'
 import Info from './components/Info.vue'
 import Dash from './components/Dash.vue'
-import items from './components/items.vue'
-import one from  '../src/components/one.vue';
 
 // Define the component
 const App = defineComponent({
@@ -34,9 +32,7 @@ const App = defineComponent({
     Search,
     Filter ,
     Info ,
-    Dash ,
-    items ,
-    one
+    Dash
     
   },
 })
@@ -44,7 +40,7 @@ const App = defineComponent({
 
 <template>
   <div>
-  
-    <router-view /> 
+    <!-- Render the SideBar component -->
+    <router-view /> <!-- Render the current route component -->
   </div>
 </template>

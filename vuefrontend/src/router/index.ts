@@ -12,6 +12,7 @@ import SearchVue from '../components/Search.vue';
 import NavbarVue from '@/components/Navbar.vue';
 import FilterVue from '@/components/Filter.vue';
 import InfoVue from '@/components/Info.vue';
+import Dash from '@/components/Dash.vue';
 
 
 const routes = [
@@ -48,9 +49,9 @@ const routes = [
     component: SideBar
   } ,
   {
-    path: '/Dashboard',
-    name: 'Dashboard',
-    component: DashboardVue
+    path: '/Dash',
+    name: 'Dash',
+    component: Dash
   } ,
   {
     path:'/Search',

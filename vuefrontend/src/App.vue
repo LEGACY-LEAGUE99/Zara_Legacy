@@ -13,7 +13,7 @@ import Search from '../src/components/Search.vue';
 import Navbar from './components/Navbar.vue'
 import Filter from './components/Filter.vue'
 import Info from './components/Info.vue'
-
+import Dash from './components/Dash.vue'
 
 // Define the component
 const App = defineComponent({
@@ -31,7 +31,9 @@ const App = defineComponent({
     OneP,
     Search,
     Filter ,
-    Info 
+    Info ,
+    Dash
+    
   },
 })
 </script>

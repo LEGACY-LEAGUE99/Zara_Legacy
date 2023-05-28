@@ -15,7 +15,7 @@
             name="flexRadioDefault"
             id="flexRadioDefault1"
             :checked="!isAdmin"
-            @change="() => setIsAdmin(false)"
+            @change="() =>{ isAdmin =false}"
           />
           <label class="reg1" for="flexRadioDefault1">
             USER
@@ -28,7 +28,7 @@
             name="flexRadioDefault"
             id="flexRadioDefault2"
             :checked="isAdmin"
-            @change="()=>setIsAdmin(true)"
+            @change="() =>{ isAdmin =true}"
           />
           <label class="reg2" for="flexRadioDefault2">
             ADMIN
@@ -143,30 +143,39 @@
 </div>
 </template>
 <script lang="ts">
-import { ref , defineComponent } from 'vue';
+import { ref, defineComponent } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 
-export default defineComponent ({
+interface setup {
+  isAdmin : any
+  }
+
+export default defineComponent({
   setup() {
     const router = useRouter();
     const formData = ref({});
     const isAdmin = ref(false);
 
-    const handleChange = (e : any) => {
+    const handleChange = (e: any) => {
       formData.value = {
         ...formData.value,
         [e.target.name]: e.target.value,
       };
     };
 
-    const handleSubmit = async (e :any) => {
+    const handleSubmit = async (e: any) => {
       e.preventDefault();
 
       try {
-        const formDataWithAdmin = { ...formData.value, is_admin: isAdmin.value };
+        const formDataWithAdmin = {
+          ...formData.value,
+          is_admin: isAdmin.value, 
+        };
+
         const response = await axios.post('http://localhost:3000/register', formDataWithAdmin);
         console.log(response.data);
+        localStorage.setItem('isAdmin', JSON.stringify(isAdmin.value))
         router.push('/Login');
       } catch (error) {
         console.error(error);

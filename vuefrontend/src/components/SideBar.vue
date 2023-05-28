@@ -152,12 +152,12 @@
   }
   
   .toggle-button {
-    position: absolute;
+    position: fixed;
     z-index: 10;
-    left: -190px;
-    padding: 100;
+    left: 10px;
+    padding: 20px 40px ;
     cursor: pointer;
-    border: none;
+    border: none ;
     background: none;
     font-size: 20px;
   }

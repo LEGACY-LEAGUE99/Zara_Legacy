@@ -20,8 +20,8 @@
       <div id="result" v-else-if="helpPage">
         <h3 id="topic">Topic: {{ helpPage.topic }} </h3>
         <h2 id="faq">FAQ: {{ helpPage.title }}</h2>
-        <p>Question: {{ helpPage.question }}</p>
-        <p>Answer: {{ helpPage.answer }}</p>
+        <p id="pp">Question: {{ helpPage.question }}</p>
+        <p id="pp">Answer: {{ helpPage.answer }}</p>
       </div>
   </div>
     </div>
@@ -219,6 +219,11 @@ color: #0c0b0b;
     bottom: -30px;
 }
 
+#pp{
+  position: relative;
+  left: -10px;
+  bottom: 20px;
+}
 
 
 

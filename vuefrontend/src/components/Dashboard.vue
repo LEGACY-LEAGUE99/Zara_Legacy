@@ -28,7 +28,10 @@ import { isProxy, toRaw, useSSRContext } from 'vue';
     },
     async created() {
       try {
-        const response = await axios.get('http://localhost:3000/users');   // get request of users from api
+
+        const response = await axios.get('http://localhost:3000/users');  
+
+
        this.users= response.
        console.log(this.users);
        

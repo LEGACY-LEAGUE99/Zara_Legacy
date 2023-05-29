@@ -5,11 +5,19 @@ import Home from './components/Home.vue'
 import Login from './components/Login.vue'
 import SignUp from './components/SignUp.vue'
 import Products from './components/Products.vue'
-import Compte from './components/Compte.vue'
 import Help from './components/Help.vue'
 import SideBar from './components/SideBar.vue'
+import Cart from '../src/components/Cart.vue';
+import OneP from '../src/components/OneP.vue';
+import Search from '../src/components/Search.vue';
+import Navbar from './components/Navbar.vue'
+import Filter from './components/Filter.vue'
+import Info from './components/Info.vue'
+import Dash from './components/Dash.vue'
+import items from './components/items.vue'
+import one from  '../src/components/one.vue';
 
-// Define the component
+
 const App = defineComponent({
   components: {
     RouterLink,
@@ -18,16 +26,42 @@ const App = defineComponent({
     Login,
     SignUp,
     Products,
-    Compte,
     Help,
-    SideBar
+    SideBar,
+    Navbar, 
+    Cart ,
+    OneP,
+    Search,
+    Filter ,
+    Info ,
+    Dash ,
+    items ,
+    one
+    
   },
 })
 </script>
 
 <template>
   <div>
-    <!-- Render the SideBar component -->
-    <router-view /> <!-- Render the current route component -->
+  
+    <router-view /> 
   </div>
 </template>
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-gap: 10rem;
+  padding: -10px 0px;
+}
+
+.grid-item {
+  position: relative;
+  bottom: -100px;
+  border: 1px solid #ccc;
+  padding: 2rem;
+  cursor: pointer;
+  text-align: center;
+}

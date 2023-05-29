@@ -1,6 +1,13 @@
 <template>
     <div>
-      <h1>ZARA</h1>
+
+      <div class="logo">
+        <a href="/">
+          <img src="https://logodownload.org/wp-content/uploads/2014/05/zara-logo-1.png" alt="zaralogo" />
+        </a>
+       
+      </div>
+
       <h2 class="headingform">PERSONAL DETAILS</h2>
       <div class="changeform-btn">
         <div class="form-check">
@@ -10,7 +17,9 @@
             name="flexRadioDefault"
             id="flexRadioDefault1"
             :checked="!isAdmin"
-            @change="() => setIsAdmin(false)"
+
+            @change="() =>{ isAdmin =false}"
+
           />
           <label class="reg1" for="flexRadioDefault1">
             USER
@@ -23,7 +32,8 @@
             name="flexRadioDefault"
             id="flexRadioDefault2"
             :checked="isAdmin"
-            @change="() => setIsAdmin(true)"
+
+            @change="() =>{ isAdmin =true}"
           />
           <label class="reg2" for="flexRadioDefault2">
             ADMIN
@@ -107,6 +117,7 @@
   </button>
 </form>
 
+
 <div class="signup-header">
   <div class="list-group">
     <h6 class="header-heading1">FOLLOW-US</h6>
@@ -136,31 +147,41 @@
 </div>
 </div>
 </template>
-<script>
-import { ref } from 'vue';
+
+<script lang="ts">
+import { ref, defineComponent } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 
-export default {
+interface setup {
+  isAdmin : any
+  }
+
+export default defineComponent({
+
   setup() {
     const router = useRouter();
     const formData = ref({});
     const isAdmin = ref(false);
-
-    const handleChange = (e) => {
       formData.value = {
         ...formData.value,
         [e.target.name]: e.target.value,
       };
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: any) => {
       e.preventDefault();
 
       try {
-        const formDataWithAdmin = { ...formData.value, is_admin: isAdmin.value };
+        const formDataWithAdmin = {
+          ...formData.value,
+          is_admin: isAdmin.value, 
+        };
+
         const response = await axios.post('http://localhost:3000/register', formDataWithAdmin);
         console.log(response.data);
+        localStorage.setItem('isAdmin', JSON.stringify(isAdmin.value))
+
         router.push('/Login');
       } catch (error) {
         console.error(error);
@@ -172,8 +193,7 @@ export default {
       handleSubmit,
       isAdmin,
     };
-  },
-};
+},
 </script>
 
 <style scoped>
@@ -230,15 +250,6 @@ export default {
     .checkbox2 {
     position: relative;
     bottom: -230px;
-    left: -524px;
-    width: 100%;
-    display: flex;
-    margin-top: 1%;
-    }
-    .checkbox2 {
-    position: relative;
-    bottom: -230px;
-    left: -524px;
     width: 100%;
     display: flex;
     margin-top: 1%;
@@ -255,8 +266,6 @@ export default {
     
     .signupbtn {
     position: relative;
-    left: -999px;
-    bottom: -150px;
     width: 85%;
     background-color: rgb(253, 251, 251);
     color: rgb(14, 12, 12);
@@ -373,5 +382,26 @@ export default {
 .reg2 {
     position: relative;
     left: 100px;
+
+    bottom: -90px;
 }
+
+.logo{
+    display:flex;
+    position: relative;
+     left: 200px;
+}
+.logo{
+    width: 210px;
+    margin-top: 10px;
+    margin-left: 8%;
+    margin-bottom: 10px;
+}
+.logo>a>img{
+    width: 100%;
+    position: absolute;
+  z-index: 2;
+}
+
+
 </style>

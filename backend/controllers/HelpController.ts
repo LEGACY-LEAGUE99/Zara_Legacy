@@ -17,7 +17,6 @@ import Help from '../models/HelpModel';
 const Segg = async (req: Request, res: Response) => {
   try {
     const searchQuery = req.query.query;
-    // Perform a MongoDB query to retrieve suggestions based on the searchQuery
     const suggestions = await Help.find({ topic: { $regex: searchQuery, $options: 'i' } }).limit(10);
     return res.json(suggestions);
   } catch (error) {

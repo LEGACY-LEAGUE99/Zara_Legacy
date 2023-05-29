@@ -90,6 +90,7 @@
      </div>
    </div>
  </template>
+
  
  <script>
  import { ref } from 'vue';
@@ -97,18 +98,17 @@
  import { useRouter } from 'vue-router';
  
  export default {
-   setup() {
-     const router = useRouter();
-     const formData = ref({ email: '', password: '' });
- 
-     const handleChange = (e) => {
+
+     const handleChange = (e :any) => {
        formData.value = {
          ...formData.value,
          [e.target.name]: e.target.value,
        };
      };
  
-     const handleSubmit = async (e) => {
+
+     const handleSubmit = async (e : any) => {
+
        e.preventDefault();
  
        try {
@@ -117,8 +117,13 @@
          console.log(response.data.user.fname);
          localStorage.setItem('userName', response.data.user.fname);
          localStorage.setItem('admin', response.data.user.is_admin);
+
+         localStorage.setItem("userid" , response.data.user._id)
+         localStorage.setItem("info" , response.data)
+
          router.push('/');
-       } catch (error) {
+       } catch (error : any) {
+
          console.error('Login failed:', error.message);
        }
      };
@@ -128,10 +133,29 @@
        handleSubmit,
      };
    },
- };
+
+ })
  </script>
  
  <style scoped>
+ .logo{
+    display:flex;
+    position: relative;
+     left: 200px;
+}
+.logo{
+    width: 210px;
+    margin-top: 10px;
+    margin-left: 8%;
+    margin-bottom: 10px;
+}
+.logo>a>img{
+    width: 100%;
+    position: absolute;
+  z-index: 2;
+}
+
+
  .container-login {
     width: 60%;
     display: flex;

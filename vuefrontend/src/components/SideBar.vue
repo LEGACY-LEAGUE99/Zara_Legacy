@@ -6,7 +6,7 @@
         </button>
         <transition name="slide">
           <div v-if="showOptions" class="options">
-            <ul class="options-list">
+            <ul class="options-list"> 
               <li v-for="option in options" :key="option.id" class="option">
                 <button class="option-button" @click="toggleSuboptions(option)">
                   {{ option.title }}
@@ -38,7 +38,7 @@
   interface Suboption {
     id: number;
     title: string;
-    showSuboptions: boolean; // Add this property
+    showSuboptions: boolean; 
   }
   
   export default defineComponent({
@@ -60,6 +60,13 @@
               { id: 6, title: 'TROUSERS', showSuboptions: false },
               { id: 7, title: 'SHOES', showSuboptions: false },
               { id: 8, title: 'BAGS', showSuboptions: false },
+              { id: 11, title: 'JACKETS', showSuboptions: false },
+              { id: 12, title: 'TROUSERS', showSuboptions: false },
+              { id: 13, title: 'JEANS', showSuboptions: false },
+              { id: 13, title: 'SHORTS', showSuboptions: false },
+              { id: 13, title: 'HOODIES', showSuboptions: false },
+              { id: 13, title: 'BASICS', showSuboptions: false },
+              { id: 13, title: 'T-SHIRTS', showSuboptions: false }
             ],
           },
           {
@@ -145,14 +152,18 @@
   }
   
   .toggle-button {
-    padding: 10px;
+    position: fixed;
+    z-index: 10;
+    left: 10px;
+    padding: 20px 40px ;
     cursor: pointer;
-    border: none;
+    border: none ;
     background: none;
     font-size: 20px;
   }
   
   .options {
+
     background: none;
     border-style: none;
     background-color: aliceblue;
@@ -199,5 +210,9 @@
   .slide-leave-to {
     transform: translateX(-100%);
   }
+
+  
+
+
   </style>
   

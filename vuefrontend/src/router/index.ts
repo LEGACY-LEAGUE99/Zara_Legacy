@@ -1,12 +1,15 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../components/Home.vue';
-import Login from '../components/Login.vue';
-import SignUp from '../components/SignUp.vue';
-import Products from '../components/Products.vue';
-import Compte from '../components/Compte.vue';
-import Help from '../components/Help.vue';
-import SideBar from '../components/SideBar.vue';
-import DashboardVue from '@/components/Dashboard.vue';
+
+
+import CartVue from '../components/Cart.vue';
+import OnePVue from '../components/OneP.vue';
+import SearchVue from '../components/Search.vue';
+import NavbarVue from '@/components/Navbar.vue';
+import FilterVue from '@/components/Filter.vue';
+import InfoVue from '@/components/Info.vue';
+import Dash from '@/components/Dash.vue';
+import itemsVue from '@/components/items.vue';
+import one from '@/components/one.vue';
+
 
 
 const routes = [
@@ -25,16 +28,13 @@ const routes = [
     name: 'SignUp',
     component: SignUp
   },
+   
   {
     path: '/Products',
     name: 'Products',
     component: Products
   },
-  {
-    path: '/Compte',
-    name: 'Compte',
-    component: Compte
-  },
+ 
   {
     path: '/Help',
     name: 'Help',
@@ -46,9 +46,53 @@ const routes = [
     component: SideBar
   } ,
   {
+
+    path: '/Dash',
+    name: 'Dash',
+    component: Dash
+  } ,
+  {
+    path:'/Search',
+    component:SearchVue
+  },
+  {
+    path: '/OneProduct',
+    component: OnePVue
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: CartVue
+  }
+  ,{
+    path: '/Navbar',
+    name: 'Navbar',
+    component: NavbarVue
+  },{
+    path: '/Filter',
+    name: 'Filter',
+    component: FilterVue
+  } ,
+  {
+    path: '/Info',
+    name: 'Info',
+    component: InfoVue
+  } ,
+  {
+    path: '/Items',
+    name: 'Items',
+    component: itemsVue
+
+  },
+  {
+    path: '/items/:itemId',
+    name: 'one',
+    component: one
+
     path: '/Dashboard',
     name: 'Dashboard',
     component: DashboardVue
+
   }
 ];
 

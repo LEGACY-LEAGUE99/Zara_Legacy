@@ -1,141 +1,238 @@
 <template>
-    <div>
-      <h1>Admin Dashboard</h1>
-  
-      <h2>Users</h2>
+
+  <Navbar/>
+  <div class="admin-dashboard">
+    <h2>Admin Dashboard</h2>
+    <div class="item-list">
+      <h3>All Items</h3>
       <table>
         <thead>
           <tr>
-            <th>User ID</th>
-            <th>Card Info</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="user in users" :key="user.id">
-            <td>{{ user.id }}</td>
-            <td>{{ user.cardInfo }}</td>
-          </tr>
-        </tbody>
-      </table>
-  
-      <h2>Products</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Product Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="category in categories" :key="category.id">
-            <td>{{ category.name }}</td>
+          <tr v-for="item in items" :key="item._id" class="item">
+            <td><img :src="item.image" :alt="item.name" class="item-image" /></td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.price }}</td>
             <td>
-              <ul>
-                <li v-for="product in category.items" :key="product.id">
-                  {{ product.name }}
-                </li>
-              </ul>
+              <button @click="editItem(item)">Edit</button>
+              <button @click="deleteItem(item)">Delete</button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-  </template>
-  
-  <script lang="ts">
-  import { defineComponent } from 'vue';
-  
-  interface User {
-    id: number;
-    cardInfo: string;
-  }
-  
-  interface Category {
-    id: number;
-    name: string;
-    items: Product[];
-  }
-  
-  interface Product {
-    id: number;
-    name: string;
-  }
-  
-  export default defineComponent({
+    <h3>Add New Item</h3>
+<form @submit.prevent="addItem">
+  <input type="text" v-model="newItem.name" placeholder="Name" required />
+  <input type="text" v-model="newItem.image" placeholder="URL" required />
+
+  <label for="gen">Gender:</label>
+  <ul id="gen">
+    <li v-for="option in genderOptions" :key="option.value">
+      <input
+        type="radio"
+        v-model="newItem.gen"
+        :value="option.value"
+        :id="option.value"
+        name="gen"
+        required
+      />
+      <label :for="option.value">{{ option.label }}</label>
+    </li>
+  </ul>
+
+  <input type="text" v-model="newItem.price" placeholder="Price" required />
+  <input type="text" v-model="newItem.desc" placeholder="Description" required />
+  <button type="submit">Add Item</button>
+</form>
+
+    <div class="edit-item-form" v-if="editMode">
+      <h3>Edit Item</h3>
+      <form @submit.prevent="updateItem">
+        <div class="form-group">
+          <label for="editedName">Name:</label>
+          <input type="text" v-model="editedItem.name" id="editedName" required />
+        </div>
+        <div class="form-group">
+          <label for="editedPrice">Price:</label>
+          <input type="text" v-model="editedItem.price" id="editedPrice" required />
+        </div>
+        <button type="submit">Save Changes</button>
+      </form>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+import axios from 'axios';
+import Navbar from './Navbar.vue';
+
+interface Item {
+  _id: string;
+  name: string;
+  price: string;
+  image: string;
+}
+
+export default defineComponent({
     data() {
-      return {
-        users: [
-          { id: 1, cardInfo: 'Card Info 1' },
-          { id: 2, cardInfo: 'Card Info 2' },
-          { id: 3, cardInfo: 'Card Info 3' },
-        ] as User[],
-        categories: [
-          {
-            id: 1,
-            name: 'Men',
-            items: [
-              { id: 1, name: 'Product 1' },
-              { id: 2, name: 'Product 2' },
+        return {
+            items: [] as Item[],
+            newItem: {
+                name: "",
+                price: "",
+                image: "",
+                gen: "",
+                desc: "",
+            } as unknown as Item,
+            editMode: false,
+            editedItem: {} as Item,
+            genderOptions: [
+                { value: "men", label: "Men" },
+                { value: "women", label: "Women" },
+                { value: "kids", label: "Kids" },
             ],
-          },
-          {
-            id: 2,
-            name: 'Women',
-            items: [
-              { id: 3, name: 'Product 3' },
-              { id: 4, name: 'Product 4' },
-            ],
-          },
-          {
-            id: 3,
-            name: 'Kids',
-            items: [
-              { id: 5, name: 'Product 5' },
-              { id: 6, name: 'Product 6' },
-            ],
-          },
-        ] as Category[],
-      };
+        };
     },
-  });
-  </script>
-  
-  <style scoped>
-  h1 {
-    font-size: 24px;
-    margin-bottom: 16px;
-  }
-  
-  h2 {
-    font-size: 20px;
-    margin-top: 24px;
-    margin-bottom: 8px;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 16px;
-  }
-  
-  th,
-  td {
-    border: 1px solid #ccc;
-    padding: 8px;
-  }
-  
-  th {
-    background-color: #f0f0f0;
-  }
-  
-  ul {
-    margin: 0;
-    padding-left: 0;
-  }
-  
-  li {
-    list-style-type: none;
-    margin-bottom: 4px;
-  }
-  </style>
-  
+    mounted() {
+        this.getAllItems();
+    },
+    methods: {
+        async getAllItems() {
+            try {
+                const response = await axios.get("http://localhost:3000/api/items");
+                this.items = response.data;
+            }
+            catch (error) {
+                console.error(error);
+            }
+        },
+        async addItem() {
+            try {
+                const response = await axios.post("http://localhost:3000/items", this.newItem);
+                this.items.push(response.data);
+                this.newItem = {
+                    name: "",
+                    price: "",
+                    image: "",
+                    gen: "",
+                    desc: "",
+                };
+            }
+            catch (error) {
+                console.error(error);
+            }
+        },
+        editItem(item: Item) {
+            this.editMode = true;
+            this.editedItem = { ...item };
+        },
+        async updateItem() {
+            try {
+                const response = await axios.put(`http://localhost:3000/items/${this.editedItem._id}`, this.editedItem);
+                const updatedItemIndex = this.items.findIndex((item) => item._id === response.data._id);
+                if (updatedItemIndex !== -1) {
+                    this.items.splice(updatedItemIndex, 1, response.data);
+                }
+                this.editMode = false;
+                this.editedItem = {} as Item;
+            }
+            catch (error) {
+                console.error(error);
+            }
+        },
+        async deleteItem(item: Item) {
+            try {
+                await axios.delete(`http://localhost:3000/items/${item._id}`);
+                this.items = this.items.filter((i) => i._id !== item._id);
+            }
+            catch (error) {
+                console.error(error);
+            }
+        },
+    },
+    components: { Navbar }
+});
+</script>
+
+<style scoped>
+.admin-dashboard {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.item-list {
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+.item-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.add-item-form,
+.edit-item-form {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+input {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+}
+</style>

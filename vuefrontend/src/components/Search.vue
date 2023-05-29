@@ -356,7 +356,7 @@ display: grid;
  
   
   #footer_section {
-    /* border: 2px solid red; */
+  
     margin-left: 7.5%;
   }
   footer {

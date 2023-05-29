@@ -9,7 +9,7 @@
       <nav class="navbar">
         <div class="navbar-right">
           <template v-if="userName && isAdmin">
-      <a href="/Dashboard">
+      <a href="/Dash">
         <h4 id="da">DASHBOARD</h4>
       </a>
     </template>

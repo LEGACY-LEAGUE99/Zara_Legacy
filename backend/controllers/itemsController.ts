@@ -5,7 +5,7 @@ import ItemModel from '../models/items'
 interface Items {
     Items : any
   }
-// Create a new product
+
 export const createItem = async (req: Request, res: Response) => {
   try {
     const newItem: Items = req.body;
@@ -16,15 +16,15 @@ export const createItem = async (req: Request, res: Response) => {
   }
 };
 
-// Get all products
+
 export const getAllItems = async (req: Request, res: Response) => {
   try {
     const items = await ItemModel.find({});
     if (items.length === 0) {
-      // If no items are found, return a 404 status code with an error message
+    
       return res.status(404).json({ error: 'No items found' });
     }
-    // If items are found, return them in the response
+   
     return res.json(items);
   } catch (error) {
     return res.status(500).json({ error: 'Failed to retrieve items' });

@@ -163,9 +163,7 @@
   }
   
   .options {
-    position: relative;
-    left: -230px;
-    bottom: -80px;
+
     background: none;
     border-style: none;
     background-color: aliceblue;

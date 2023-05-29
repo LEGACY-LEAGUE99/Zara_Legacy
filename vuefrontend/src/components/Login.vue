@@ -1,10 +1,4 @@
 <template>
-        <div class="logo">
-        <a href="/">
-          <img src="https://logodownload.org/wp-content/uploads/2014/05/zara-logo-1.png" alt="zaralogo" />
-        </a>
-      </div>
-
    <form @submit="handleSubmit" class="container-login">
      <div class="Left-login-form">
        <h3 class="login-heading">LOGIN IN TO YOUR ACCOUNT</h3>
@@ -97,20 +91,14 @@
    </div>
  </template>
 
-
  
- <script lang="ts" >
-
- import { ref , defineComponent } from 'vue';
+ <script>
+ import { ref } from 'vue';
  import axios from 'axios';
  import { useRouter } from 'vue-router';
  
- 
- export default defineComponent ({
-   setup() {
-     const router = useRouter();
-     const formData = ref({ email: '', password: '' });
- 
+ export default {
+
      const handleChange = (e :any) => {
        formData.value = {
          ...formData.value,
@@ -118,7 +106,9 @@
        };
      };
  
+
      const handleSubmit = async (e : any) => {
+
        e.preventDefault();
  
        try {
@@ -127,11 +117,13 @@
          console.log(response.data.user.fname);
          localStorage.setItem('userName', response.data.user.fname);
          localStorage.setItem('admin', response.data.user.is_admin);
+
          localStorage.setItem("userid" , response.data.user._id)
          localStorage.setItem("info" , response.data)
 
          router.push('/');
        } catch (error : any) {
+
          console.error('Login failed:', error.message);
        }
      };
@@ -141,6 +133,7 @@
        handleSubmit,
      };
    },
+
  })
  </script>
  
@@ -161,6 +154,7 @@
     position: absolute;
   z-index: 2;
 }
+
 
  .container-login {
     width: 60%;

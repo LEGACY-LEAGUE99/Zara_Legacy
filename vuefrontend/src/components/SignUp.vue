@@ -1,11 +1,13 @@
 <template>
     <div>
+
       <div class="logo">
         <a href="/">
           <img src="https://logodownload.org/wp-content/uploads/2014/05/zara-logo-1.png" alt="zaralogo" />
         </a>
        
       </div>
+
       <h2 class="headingform">PERSONAL DETAILS</h2>
       <div class="changeform-btn">
         <div class="form-check">
@@ -15,7 +17,9 @@
             name="flexRadioDefault"
             id="flexRadioDefault1"
             :checked="!isAdmin"
+
             @change="() =>{ isAdmin =false}"
+
           />
           <label class="reg1" for="flexRadioDefault1">
             USER
@@ -28,6 +32,7 @@
             name="flexRadioDefault"
             id="flexRadioDefault2"
             :checked="isAdmin"
+
             @change="() =>{ isAdmin =true}"
           />
           <label class="reg2" for="flexRadioDefault2">
@@ -142,6 +147,7 @@
 </div>
 </div>
 </template>
+
 <script lang="ts">
 import { ref, defineComponent } from 'vue';
 import axios from 'axios';
@@ -152,12 +158,11 @@ interface setup {
   }
 
 export default defineComponent({
+
   setup() {
     const router = useRouter();
     const formData = ref({});
     const isAdmin = ref(false);
-
-    const handleChange = (e: any) => {
       formData.value = {
         ...formData.value,
         [e.target.name]: e.target.value,
@@ -176,6 +181,7 @@ export default defineComponent({
         const response = await axios.post('http://localhost:3000/register', formDataWithAdmin);
         console.log(response.data);
         localStorage.setItem('isAdmin', JSON.stringify(isAdmin.value))
+
         router.push('/Login');
       } catch (error) {
         console.error(error);
@@ -187,14 +193,11 @@ export default defineComponent({
       handleSubmit,
       isAdmin,
     };
-  },
-});
+},
 </script>
 
 <style scoped>
 .container {
-  position: relative;
-  bottom: -50px;
     width: 100%;
     display: flex;
     margin: 4%;
@@ -247,7 +250,6 @@ export default defineComponent({
     .checkbox2 {
     position: relative;
     bottom: -230px;
-    left: -530px;
     width: 100%;
     display: flex;
     margin-top: 1%;
@@ -264,8 +266,6 @@ export default defineComponent({
     
     .signupbtn {
     position: relative;
-    left: -1010px;
-    bottom: -110px;
     width: 85%;
     background-color: rgb(253, 251, 251);
     color: rgb(14, 12, 12);
@@ -368,7 +368,6 @@ export default defineComponent({
             h2{
                 position: relative;
                 left: 100px;
-                bottom: -90px;
             }
             h1{
                 position: relative;
@@ -379,11 +378,11 @@ export default defineComponent({
 .reg1 {
     position: relative;
     left: 100px;
-    bottom: -90px;
 }
 .reg2 {
     position: relative;
     left: 100px;
+
     bottom: -90px;
 }
 
@@ -403,5 +402,6 @@ export default defineComponent({
     position: absolute;
   z-index: 2;
 }
+
 
 </style>

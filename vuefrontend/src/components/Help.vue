@@ -1,50 +1,10 @@
 <template>
-  <div>
-    <SideBar/>
-    <Navbar/>
-    <img id="pic" src="https://static.zara.net/photos///contents/mkt/spots/ss23-help-customer/subhome-xmedia-10-north//w/1920/IMAGE-landscape-web-27470945-8c31-433a-9eaf-392114b6a91d-default_0.jpg?ts=1682518360676" alt="">
-    <div>
- <p id="how"> HOW CAN WE HELP YOU ?</p>
-   <input id="search" type="text" v-model="searchTopic" placeholder="SEARCH" @input="fetchSuggestions" />
-  <div class="added">
-
-      <ul v-if="suggestions.length" >
-        <li id="segg" v-for="(suggestion, index) in suggestions" :key="index">{{ suggestion.title }}</li>
-        <button id="srch" @click="searchHelp">Search</button> 
-      </ul>
-  
-      
-  
-      <div v-if="isLoading">Loading...</div>
-      <div v-else-if="errorMessage">{{ errorMessage }}</div>
-      <div id="result" v-else-if="helpPage">
-        <h3 id="topic">Topic: {{ helpPage.topic }} </h3>
-        <h2 id="faq">FAQ: {{ helpPage.title }}</h2>
-        <p id="pp">Question: {{ helpPage.question }}</p>
-        <p id="pp">Answer: {{ helpPage.answer }}</p>
-      </div>
-  </div>
-    </div>
-
-    <h3>Frequently Asked Questions </h3>
-    <h5 id="s1">ITEMS AVILABILITY</h5> <h5 id="s2">HOW TO RETURN</h5> <h5 id="s3">ORDER STATUS</h5> <h5 id="s4">REFUNDS</h5>
-    <h2>All help topics</h2>
-    <ul id="foot">
-      <li>My Zara Account</li>
-      <li>Items and Sizes</li>
-      <li>Shipping</li>
-      <li>Payments and Invoices</li>
-      <li>My Purchases</li>
-      <li>Exchanges, Returns, and Refunds</li>
-      <li>ara Experiences</li>
-    </ul>
-  </div>
-</template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import axios from 'axios';
 import SideBar from './SideBar.vue';
+
 import Navbar from './Navbar.vue';
 
 
@@ -228,3 +188,46 @@ color: #0c0b0b;
 
 
 </style>
+=======
+
+interface HelpPage {
+  title: string;
+  question: string;
+  Answer: string;
+}
+
+export default defineComponent({
+    data() {
+        return {
+            searchTitle: "",
+            isLoading: false,
+            errorMessage: "",
+            helpPage: null as HelpPage | any,
+        };
+    },
+    methods: {
+        async searchHelp() {
+            try {
+                this.isLoading = true;
+                this.errorMessage = "";
+                this.helpPage = null;
+                const response = await axios.get(`http://localhost:3000/help/${this.searchTitle}`);
+                this.helpPage = response.data;
+                console.log(this.helpPage.answer);
+            }
+            catch (error: any) {
+                if (error.response && error.response.status === 404) {
+                    this.errorMessage = "Help page not found.";
+                }
+                else {
+                    this.errorMessage = "Internal server error.";
+                }
+            }
+            finally {
+                this.isLoading = false;
+            }
+        },
+    },
+    components: { SideBar }
+});
+</script>

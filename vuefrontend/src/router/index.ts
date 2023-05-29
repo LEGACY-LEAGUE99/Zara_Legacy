@@ -1,11 +1,5 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../components/Home.vue';
-import Login from '../components/Login.vue';
-import SignUp from '../components/SignUp.vue';
-import Products from '../components/Products.vue';
-import Help from '../components/Help.vue';
-import SideBar from '../components/SideBar.vue';
-import DashboardVue from '@/components/Dashboard.vue';
+
+
 import CartVue from '../components/Cart.vue';
 import OnePVue from '../components/OneP.vue';
 import SearchVue from '../components/Search.vue';
@@ -15,6 +9,7 @@ import InfoVue from '@/components/Info.vue';
 import Dash from '@/components/Dash.vue';
 import itemsVue from '@/components/items.vue';
 import one from '@/components/one.vue';
+
 
 
 const routes = [
@@ -51,6 +46,7 @@ const routes = [
     component: SideBar
   } ,
   {
+
     path: '/Dash',
     name: 'Dash',
     component: Dash
@@ -92,6 +88,10 @@ const routes = [
     path: '/items/:itemId',
     name: 'one',
     component: one
+
+    path: '/Dashboard',
+    name: 'Dashboard',
+    component: DashboardVue
 
   }
 ];

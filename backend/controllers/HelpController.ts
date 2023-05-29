@@ -17,7 +17,6 @@ import Help from '../models/HelpModel';
 const Segg = async (req: Request, res: Response) => {
   try {
     const searchQuery = req.query.query;
-    
     const suggestions = await Help.find({ topic: { $regex: searchQuery, $options: 'i' } }).limit(10);
     return res.json(suggestions);
   } catch (error) {

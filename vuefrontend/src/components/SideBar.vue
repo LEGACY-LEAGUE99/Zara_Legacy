@@ -38,7 +38,7 @@
   interface Suboption {
     id: number;
     title: string;
-    showSuboptions: boolean; // Add this property
+    showSuboptions: boolean; 
   }
   
   export default defineComponent({

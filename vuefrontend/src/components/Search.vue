@@ -113,9 +113,7 @@ import  NavbarVue from './Navbar.vue';
         handleSearch() {
             this.filteredProducts = this.products.filter((product) => product.name.toLowerCase().includes(this.searchTerm.toLowerCase()));
         },
-        //   goToProduct(productId) {
-        //     this.$router.push(`/OneP/${productId}`);
-        //   },
+      
     },
     computed: {
         filteredProducts(): Product[] {
@@ -143,11 +141,11 @@ import  NavbarVue from './Navbar.vue';
     z-index: 1;
   }
   
-  /* top left side hamburger section  */
+  
   #hambuger {
     width: 25%;
   
-    /* border: 1px solid red; */
+  
   }
   #hamburgerIcon {
     width: 15%;
@@ -156,9 +154,9 @@ import  NavbarVue from './Navbar.vue';
     cursor: pointer;
   }
   
-  /* right side logo head   */
+ 
   #logohead {
-    /* border: 1px solid blue; */
+   
     display: flex;
     padding-top: 0.8em;
   }
@@ -172,7 +170,7 @@ import  NavbarVue from './Navbar.vue';
     height: 100%;
     cursor: pointer;
   
-    /* border: 1px solid red; */
+
   }
   a{
       text-decoration: none;
@@ -180,7 +178,7 @@ import  NavbarVue from './Navbar.vue';
   }
   
   ul {
-    /* border: 2px solid green; */
+    
     display: flex;
     list-style: none;
     position: absolute;
@@ -197,15 +195,13 @@ import  NavbarVue from './Navbar.vue';
   
   
   
-  /* main container   */
   #main {
     width: 92.5%;
-    /* border: 1px solid red; */
+    
     margin-left: 7.9999%;
   }
   
   
-  /* search baar  */
   #searchbar {
     margin-top: 6em;
     width: 95%;
@@ -220,7 +216,7 @@ import  NavbarVue from './Navbar.vue';
     color: black;
   }
   
-  /* below search baar tranding products  */
+  
   #trending_product {
     border: 1px solid red;
     position: flex;
@@ -230,7 +226,7 @@ import  NavbarVue from './Navbar.vue';
   #trending_product > :first-child {
     color: black;
     cursor: text;
-    /* border: 1px solid red; */
+  
     font-size: 1.5em;
   }
   
@@ -250,7 +246,7 @@ display: grid;
     display: none;
   }
   #shirt-products {
-    /* display: grid; */
+
     grid-template-columns: repeat(6, 1fr);
     grid-gap: 20px;
     padding: 0px 20px;
@@ -272,7 +268,7 @@ display: grid;
     width: 100%;
   }
   
-  /* shoes product   */
+ 
   #shoes-products{
     grid-template-columns: repeat(6, 1fr);
     grid-gap: 20px;
@@ -295,7 +291,7 @@ display: grid;
     width: 100%;
   }
   
-  /* womenAccessories-products */
+ 
   
   #womenAccessories-products{
     grid-template-columns: repeat(6, 1fr);
@@ -319,7 +315,7 @@ display: grid;
     width: 100%;
   }
   
-  /* women-jacket  */
+
   #women-jacket {
     grid-template-columns: repeat(6, 1fr);
     grid-gap: 20px;
@@ -342,16 +338,14 @@ display: grid;
     width: 100%;
   }
   
-  /* footer section   */
+ 
   #about {
     display: flex;
     width: 92.5%;
     border-bottom: 1px solid rgb(212, 211, 211);
     padding-top: 50%;
     padding-bottom: 10%;
-    /* border: 2px solid red; */
-  
-    /* margin-bottom: 50px; */
+   
   }
   #about > :nth-child(3) {
     margin-left: 2.3em;

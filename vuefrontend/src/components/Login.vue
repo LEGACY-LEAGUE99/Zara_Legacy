@@ -127,6 +127,9 @@
          console.log(response.data.user.fname);
          localStorage.setItem('userName', response.data.user.fname);
          localStorage.setItem('admin', response.data.user.is_admin);
+         localStorage.setItem("userid" , response.data.user._id)
+         localStorage.setItem("info" , response.data)
+
          router.push('/');
        } catch (error : any) {
          console.error('Login failed:', error.message);

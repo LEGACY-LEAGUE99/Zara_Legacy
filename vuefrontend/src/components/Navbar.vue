@@ -16,7 +16,7 @@
       
 
           <input id="search" type="text" placeholder="SEARCH" />
-          <button id="cart" class="button">Card</button>
+          <a href="/Cart">  <button id="cart" class="button">Card</button> </a>
          <a href="/Info"> <button id="info" class="button">Info</button> </a>
 
           <template v-if="userName">
@@ -78,11 +78,11 @@
   
       const handleLogout = () => {
   localStorage.removeItem('token');
-  localStorage.removeItem('userName'); // Remove the stored userName
-  localStorage.removeItem('admin'); // Remove the stored admin flag
+  localStorage.removeItem('userName'); 
+  localStorage.removeItem('admin'); 
   isDropdownOpen.value = false;
-  userName.value = ''; // Clear the userName ref
-  isAdmin.value = false; // Reset the isAdmin ref
+  userName.value = ''; 
+  isAdmin.value = false;
   router.push('/Login');
 };
   

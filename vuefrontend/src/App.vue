@@ -14,8 +14,10 @@ import Navbar from './components/Navbar.vue'
 import Filter from './components/Filter.vue'
 import Info from './components/Info.vue'
 import Dash from './components/Dash.vue'
+import items from './components/items.vue'
+import one from  '../src/components/one.vue';
 
-// Define the component
+
 const App = defineComponent({
   components: {
     RouterLink,
@@ -32,7 +34,9 @@ const App = defineComponent({
     Search,
     Filter ,
     Info ,
-    Dash
+    Dash ,
+    items ,
+    one
     
   },
 })
@@ -40,7 +44,24 @@ const App = defineComponent({
 
 <template>
   <div>
-    <!-- Render the SideBar component -->
-    <router-view /> <!-- Render the current route component -->
+  
+    <router-view /> 
   </div>
 </template>
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-gap: 10rem;
+  padding: -10px 0px;
+}
+
+.grid-item {
+  position: relative;
+  bottom: -100px;
+  border: 1px solid #ccc;
+  padding: 2rem;
+  cursor: pointer;
+  text-align: center;
+}

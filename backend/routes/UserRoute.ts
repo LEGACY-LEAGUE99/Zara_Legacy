@@ -1,5 +1,5 @@
 import express, { Router } from "express";
-import { register, login, getAllUsers , } from "../controllers/UserController";
+import { register, login, getAllUsers , AddtoCard, RemoveCard ,getCard , decreaseQuantity} from "../controllers/UserController";
 
 const router: Router = express.Router();
 
@@ -10,5 +10,9 @@ router.post("/register", register);
 router.post("/login", login);
 
 router.get("/users" , getAllUsers)
+router.post("/api/:userId/cart" , AddtoCard)
+router.get('/api/:userId/cart' , getCard )
+router.put("/api/users/:userId/cart/:itemId" , decreaseQuantity )
+router.delete("/api/users/:userId/cart/:itemId" , RemoveCard)
 
 export default router;

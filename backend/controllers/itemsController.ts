@@ -27,14 +27,12 @@ export const getAllItems = async (req: Request, res: Response) => {
     // If items are found, return them in the response
     return res.json(items);
   } catch (error) {
-    // If an error occurs during retrieval, return a 500 status code with an error message
     return res.status(500).json({ error: 'Failed to retrieve items' });
   }
 };
 
 
 
-// Get a product by ID
 export const getItemsById = async (req: Request, res: Response) => {
   try {
     const itemId = req.params.id;
@@ -49,7 +47,6 @@ export const getItemsById = async (req: Request, res: Response) => {
   }
 };
 
-// Update a product
 export const updateItem = async (req: Request, res: Response) => {
   try {
     const itemId = req.params.id;
@@ -67,7 +64,6 @@ export const updateItem = async (req: Request, res: Response) => {
   }
 };
 
-// Delete a product
 export const deleteItem = async (req: Request, res: Response) => {
   try {
     const itemId = req.params.id;
@@ -82,7 +78,6 @@ export const deleteItem = async (req: Request, res: Response) => {
   }
 };
 
-// Search and filter products
 export const searchItem = async (req: Request, res: Response) => {
   try {
     const { keyword, gen } = req.query;

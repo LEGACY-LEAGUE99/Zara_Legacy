@@ -5,7 +5,7 @@
    
     <div class="content">
       <div class="slideshow">
-        <img v-for="image in slideshowImages" :key="image" :src="image" :class="{ 'active': activeImage === image }" />
+      <a href="/items"> <img v-for="image in slideshowImages" :key="image" :src="image" :class="{ 'active': activeImage === image }" /> </a> 
       </div>
     </div>
   </div>
